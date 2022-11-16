@@ -1,0 +1,96 @@
+In graph theory, a cycle in a graph is a non-empty trail in which only the first and last vertices are equal. A directed cycle in a directed graph is a non-empty directed trail in which only the first and last vertices are equal. 
+
+A graph without cycles is called an acyclic graph. A directed graph without directed cycles is called a directed acyclic graph. A connected graph without cycles is called a tree. 
+
+## Definitions
+
+### Circuit and cycle
+
+  * A circuit is a non-empty trail in which the first and last vertices are equal (closed trail).
+
+    Let G = (V, E, ϕ) be a graph. A circuit is a non-empty trail (e1, e2, …, en) with a vertex sequence (v1, v2, …, vn, v1).
+
+  * A cycle or simple circuit is a circuit in which only the first and last vertices are equal.
+
+### Directed circuit and directed cycle
+
+  * A directed circuit is a non-empty directed trail in which the first and last vertices are equal (closed directed trail).
+
+    Let G = (V, E, ϕ) be a directed graph. A directed circuit is a non-empty directed trail (e1, e2, …, en) with a vertex sequence (v1, v2, …, vn, v1).
+
+  * A directed cycle or simple directed circuit is a directed circuit in which only the first and last vertices are equal.
+
+## Chordless cycle
+
+A chordless cycle in a graph, also called a hole or an induced cycle, is a cycle such that no two vertices of the cycle are connected by an edge that does not itself belong to the cycle. An antihole is the complement of a graph hole. Chordless cycles may be used to characterize perfect graphs: by the strong perfect graph theorem, a graph is perfect if and only if none of its holes or antiholes have an odd number of vertices that is greater than three. A chordal graph, a special type of perfect graph, has no holes of any size greater than three. 
+
+The girth of a graph is the length of its shortest cycle; this cycle is necessarily chordless. Cages are defined as the smallest regular graphs with given combinations of degree and girth. 
+
+A peripheral cycle is a cycle in a graph with the property that every two edges not on the cycle can be connected by a path whose interior vertices avoid the cycle. In a graph that is not formed by adding one edge to a cycle, a peripheral cycle must be an induced cycle. 
+
+## Cycle space
+
+The term cycle may also refer to an element of the cycle space of a graph. There are many cycle spaces, one for each coefficient field or ring. The most common is the binary cycle space (usually called simply the cycle space), which consists of the edge sets that have even degree at every vertex; it forms a vector space over the two-element field. By Veblen's theorem, every element of the cycle space may be formed as an edge-disjoint union of simple cycles. A cycle basis of the graph is a set of simple cycles that forms a basis of the cycle space.
+
+Using ideas from algebraic topology, the binary cycle space generalizes to vector spaces or modules over other rings such as the integers, rational or real numbers, etc.
+
+## Cycle detection
+
+The existence of a cycle in directed and undirected graphs can be determined by whether depth-first search (DFS) finds an edge that points to an ancestor of the current vertex (it contains a back edge). All the back edges which DFS skips over are part of cycles. In an undirected graph, the edge to the parent of a node should not be counted as a back edge, but finding any other already visited vertex will indicate a back edge. In the case of undirected graphs, only O(n) time is required to find a cycle in an n-vertex graph, since at most n − 1 edges can be tree edges. 
+
+Many topological sorting algorithms will detect cycles too, since those are obstacles for topological order to exist. Also, if a directed graph has been divided into strongly connected components, cycles only exist within the components and not between them, since cycles are strongly connected.
+
+For directed graphs, distributed message-based algorithms can be used. These algorithms rely on the idea that a message sent by a vertex in a cycle will come back to itself. Distributed cycle detection algorithms are useful for processing large-scale graphs using a distributed graph processing system on a computer cluster (or supercomputer). 
+
+Applications of cycle detection include the use of wait-for graphs to detect deadlocks in concurrent systems.
+
+## Algorithm
+    
+    
+    For every vertex v: visited(v) = false, finished(v) = false
+    For every vertex v:
+      DFS(v)
+    
+    
+    
+    DFS(v):
+      if finished(v)
+        return
+      if visited(v)
+        "Cycle found" and return
+      visited(v) = true
+      for every neighbour w
+        DFS(w)
+      finished(v) = true
+    
+
+Neighbour means for both directed and undirected graphs all vertices connected to v, except for the one that called DFS(v). This avoids the algorithm also catching trivial cycles, which is the case in every undirected graph with at least one edge. 
+
+## Programming
+
+The following example in the Programming language C# shows one implementation of an undirected graph using Adjacency lists. The undirected graph is declared as class UndirectedGraph. Executing the program uses the Main method, which - if one exists - prints the shortest, non-trivial cycle to the console.
+
+## Covering graphs by cycle
+
+In his 1736 paper on the Seven Bridges of Königsberg, widely considered to be the birth of graph theory, Leonhard Euler proved that, for a finite undirected graph to have a closed walk that visits each edge exactly once (making it a closed trail), it is necessary and sufficient that it be connected except for isolated vertices (that is, all edges are contained in one component) and have even degree at each vertex. The corresponding characterization for the existence of a closed walk visiting each edge exactly once in a directed graph is that the graph be strongly connected and have equal numbers of incoming and outgoing edges at each vertex. In either case, the resulting closed trail is known as an Eulerian trail. If a finite undirected graph has even degree at each of its vertices, regardless of whether it is connected, then it is possible to find a set of simple cycles that together cover each edge exactly once: this is Veblen's theorem. When a connected graph does not meet the conditions of Euler's theorem, a closed walk of minimum length covering each edge at least once can nevertheless be found in polynomial time by solving the route inspection problem. 
+
+The problem of finding a single simple cycle that covers each vertex exactly once, rather than covering the edges, is much harder. Such a cycle is known as a Hamiltonian cycle, and determining whether it exists is NP-complete. Much research has been published concerning classes of graphs that can be guaranteed to contain Hamiltonian cycles; one example is Ore's theorem that a Hamiltonian cycle can always be found in a graph for which every non-adjacent pair of vertices have degrees summing to at least the total number of vertices in the graph.
+
+The cycle double cover conjecture states that, for every bridgeless graph, there exists a multiset of simple cycles that covers each edge of the graph exactly twice. Proving that this is true (or finding a counterexample) remains an open problem.
+
+## Graph classes defined by cycle
+
+Several important classes of graphs can be defined by or characterized by their cycles. These include: 
+
+  * Bipartite graph, a graph without odd cycles (cycles with an odd number of vertices)
+  * Cactus graph, a graph in which every nontrivial biconnected component is a cycle
+  * Cycle graph, a graph that consists of a single cycle
+  * Chordal graph, a graph in which every induced cycle is a triangle
+  * Directed acyclic graph, a directed graph with no directed cycles
+  * Line perfect graph, a graph in which every odd cycle is a triangle
+  * Perfect graph, a graph with no induced cycles or their complements of odd length greater than three
+  * Pseudoforest, a graph in which each connected component has at most one cycle
+  * Strangulated graph, a graph in which every peripheral cycle is a triangle
+  * Strongly connected graph, a directed graph in which every edge is part of a cycle
+  * Triangle-free graph, a graph without three-vertex cycles
+

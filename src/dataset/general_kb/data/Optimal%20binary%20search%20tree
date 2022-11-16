@@ -1,0 +1,110 @@
+In computer science, an optimal binary search tree (Optimal BST), sometimes called a weight-balanced binary tree, is a binary search tree which provides the smallest possible search time (or expected search time) for a given sequence of accesses (or access probabilities). Optimal BSTs are generally divided into two types: static and dynamic. 
+
+In the static optimality problem, the tree cannot be modified after it has been constructed. In this case, there exists some particular layout of the nodes of the tree which provides the smallest expected search time for the given access probabilities. Various algorithms exist to construct or approximate the statically optimal tree given the information on the access probabilities of the elements. 
+
+In the dynamic optimality problem, the tree can be modified at any time, typically by permitting tree rotations. The tree is considered to have a cursor starting at the root which it can move or use to perform modifications. In this case, there exists some minimal-cost sequence of these operations which causes the cursor to visit every node in the target access sequence in order. The splay tree is conjectured to have a constant competitive ratio compared to the dynamically optimal tree in all cases, though this has not yet been proven. 
+
+## Static optimality
+
+### Definition
+
+In the static optimality problem as defined by Knuth, we are given a set of n ordered elements and a set of <math-expression>2n+1</math-expression> probabilities. We will denote the elements <math-expression>a_{1}</math-expression> through <math-expression>a_{n}</math-expression> and the probabilities <math-expression>A_{1}</math-expression> through <math-expression>A_{n}</math-expression> and <math-expression>B_{0}</math-expression> through <math-expression>B_{n}</math-expression>. <math-expression>A_{i}</math-expression> is the probability of a search being done for element <math-expression>a_{i}</math-expression> (or successful search). For <math-expression>1\leq i<n</math-expression>, <math-expression>B_{i}</math-expression> is the probability of a search being done for an element between <math-expression>a_{i}</math-expression> and <math-expression>a_{i+1}</math-expression>(or unsuccessful search), <math-expression>B_{0}</math-expression> is the probability of a search being done for an element strictly less than <math-expression>a_{1}</math-expression>, and <math-expression>B_{n}</math-expression> is the probability of a search being done for an element strictly greater than <math-expression>a_{n}</math-expression>. These <math-expression>2n+1</math-expression> probabilities cover all possible searches, and therefore add up to one. 
+
+The static optimality problem is the optimization problem of finding the binary search tree that minimizes the expected search time, given the <math-expression>2n+1</math-expression> probabilities. As the number of possible trees on a set of n elements is <math-expression>{2n \choose n}{\frac {1}{n+1}}</math-expression>, which is exponential in n, brute-force search is not usually a feasible solution. 
+
+### Knuth's dynamic programming algorithm
+
+In 1971, Knuth published a relatively straightforward dynamic programming algorithm capable of constructing the statically optimal tree in only O(n) time. In this work, Knuth extended and improved the dynamic programming algorithm by Edgar Gilbert and Edward F. Moore introduced in 1958. Gilbert's and Moore's algorithm required <math-expression>O(n^{3})</math-expression> time and <math-expression>O(n^{2})</math-expression> space and was designed for a particular case of optimal binary search trees construction (known as optimal alphabetic tree problem) that considers only the probability of unsuccessful searches, that is, <math-expression>\textstyle \sum _{i=1}^{n}A_{i}=0</math-expression>. Knuth's work relied upon the following insight: the static optimality problem exhibits optimal substructure; that is, if a certain tree is statically optimal for a given probability distribution, then its left and right subtrees must also be statically optimal for their appropriate subsets of the distribution (known as monotonicity property of the roots). 
+
+To see this, consider what Knuth calls the "weighted path length" of a tree. The weighted path length of a tree of n elements is the sum of the lengths of all <math-expression>2n+1</math-expression> possible search paths, weighted by their respective probabilities. The tree with the minimal weighted path length is, by definition, statically optimal. 
+
+But weighted path lengths have an interesting property. Let E be the weighted path length of a binary tree, EL be the weighted path length of its left subtree, and ER be the weighted path length of its right subtree. Also let W be the sum of all the probabilities in the tree. Observe that when either subtree is attached to the root, the depth of each of its elements (and thus each of its search paths) is increased by one. Also observe that the root itself has a depth of one. This means that the difference in weighted path length between a tree and its two subtrees is exactly the sum of every single probability in the tree, leading to the following recurrence: 
+
+    <math-expression>E=E_{L}+E_{R}+W</math-expression>
+
+This recurrence leads to a natural dynamic programming solution. Let <math-expression>E_{ij}</math-expression> be the weighted path length of the statically optimal search tree for all values between ai and aj, let <math-expression>W_{ij}</math-expression> be the total weight of that tree, and let <math-expression>R_{ij}</math-expression> be the index of its root. The algorithm can be built using the following formulas: 
+
+    <math-expression>{\begin{aligned}E_{i,i-1}=W_{i,i-1}&=B_{i-1}\operatorname {for} 1\leq i\leq n+1\\W_{i,j}&=W_{i,j-1}+A_{j}+B_{j}\\E_{i,j}&=\min _{i\leq r\leq j}(E_{i,r-1}+E_{r+1,j}+W_{i,j})\operatorname {for} 1\leq i\leq j\leq n\end{aligned}}</math-expression>
+
+The naive implementation of this algorithm actually takes O(n) time, but Knuth's paper includes some additional observations which can be used to produce a modified algorithm taking only O(n) time. 
+
+In addition to its dynamic programming algorithm, Knuth proposed two heuristics (or rules) to produce nearly (approximation of) optimal binary search trees. Studying nearly optimal binary search trees was necessary since Knuth's algorithm time and space complexity can be prohibitive when <math-expression>n</math-expression> is substantially large.
+
+Knuth's rules can be seen as the following: 
+
+  * Rule I (Root-max): Place the most frequently occurring name at the root of the tree, then proceed similarly on the subtrees.
+  * Rule II (Bisection): Choose the root so as to equalize the total weight of the left and right subtree as much as possible, then proceed similarly on the subtrees.
+
+Knuth's heuristics implements nearly optimal binary search trees in <math-expression>O(n\log n)</math-expression> time and <math-expression>O(n)</math-expression> space. The analysis on how far from the optimum Knuth's heuristics can be was further proposed by Kurt Mehlhorn.
+
+### Mehlhorn's approximation algorithm
+
+While the O(n) time taken by Knuth's algorithm is substantially better than the exponential time required for a brute-force search, it is still too slow to be practical when the number of elements in the tree is very large. 
+
+In 1975, Kurt Mehlhorn published a paper proving important properties regarding Knuth's rules. Mehlhorn's major results state that only one of Knuth's heuristics (Rule II) always produces nearly optimal binary search trees. On the other hand, the root-max rule could often lead to very "bad" search trees based on the following simple argument.
+
+Let 
+
+<math-expression>\textstyle {\begin{aligned}n=2^{k}-1,~~A_{i}=2^{-k}+\varepsilon _{i}~~\operatorname {with} ~~\sum _{i=1}^{n}\varepsilon _{i}=2^{-k}\end{aligned}}</math-expression>
+
+and 
+
+<math-expression>\textstyle {\begin{aligned}\varepsilon _{1},\varepsilon _{2},\dots ,\varepsilon _{n}>0~~\operatorname {for} ~~1\leqq i\leqq n~~\operatorname {and} ~~B_{j}=0\operatorname {for} ~~0\leqq j\leqq n.\end{aligned}}</math-expression>
+
+Considering the weighted path length <math-expression>P</math-expression> of the tree constructed based on the previous definition, we have the following: 
+
+<math-expression>\textstyle {\begin{aligned}P&=\sum _{i=1}^{n}A_{i}(a_{i}+1)+\sum _{j=1}^{n}B_{j}b_{j}\\&=\sum _{i=1}^{n}A_{i}i\\&\geqq 2^{-k}\sum _{i=1}^{n}i=2^{-k}{\frac {n(n+1)}{2}}\geqq {\frac {n}{2}}.\end{aligned}}</math-expression>
+
+Thus, the resulting tree by the root-max rule will be a tree that grows only on the right side (except for the deepest level of the tree), and the left side will always have terminal nodes. This tree has a path length bounded by <math-expression>\textstyle \Omega ({\frac {n}{2}})</math-expression> and, when compared with a balanced search tree (with path bounded by <math-expression>\textstyle O(2\log n)</math-expression>), will perform substantially worse for the same frequency distribution.
+
+In addition, Mehlhorn improved Knuth's work and introduced a much simpler algorithm that uses Rule II and closely approximates the performance of the statically optimal tree in only <math-expression>O(n)</math-expression> time. The algorithm follows the same idea of the bisection rule by choosing the tree's root to balance the total weight (by probability) of the left and right subtrees most closely. And the strategy is then applied recursively on each subtree. 
+
+That this strategy produces a good approximation can be seen intuitively by noting that the weights of the subtrees along any path form something very close to a geometrically decreasing sequence. In fact, this strategy generates a tree whose weighted path length is at most 
+
+    <math-expression>2+(1-\log({\sqrt {5}}-1))^{-1}H=2+{\frac {H}{1-\log({\sqrt {5}}-1)}}</math-expression>
+
+where H is the entropy of the probability distribution. Since no optimal binary search tree can ever do better than a weighted path length of 
+
+    <math-expression>(1/\log 3)H={\frac {H}{\log 3}}</math-expression>
+
+this approximation is very close.
+
+### Hu–Tucker and Garsia–Wachs algorithms
+
+In the special case that all of the <math-expression>A_{i}</math-expression> values are zero, the optimal tree can be found in time <math-expression>O(n\log n)</math-expression>. This was first proved by T. C. Hu and Alan Tucker in a paper that they published in 1971. A later simplification by Garsia and Wachs, the Garsia–Wachs algorithm, performs the same comparisons in the same order. The algorithm works by using a greedy algorithm to build a tree that has the optimal height for each leaf, but is out of order, and then constructing another binary search tree with the same heights.
+
+## Dynamic optimality
+
+### Definition
+
+There are several different definitions of dynamic optimality, all of which are effectively equivalent to within a constant factor in terms of running-time. The problem was first introduced implicitly by Sleator and Tarjan in their paper on splay trees, but Demaine et al. give a very good formal statement of it.
+
+In the dynamic optimality problem, we are given a sequence of accesses x1, ..., xm on the keys 1, ..., n. For each access, we are given a pointer to the root of our BST and may use the pointer to perform any of the following operations: 
+
+  1. Move the pointer to the left child of the current node.
+  2. Move the pointer to the right child of the current node.
+  3. Move the pointer to the parent of the current node.
+  4. Perform a single rotation on the current node and its parent.
+
+(It is the presence of the fourth operation, which rearranges the tree during the accesses, which makes this the dynamic optlmality problem.) 
+
+For each access, our BST algorithm may perform any sequence of the above operations as long as the pointer eventually ends up on the node containing the target value xi. The time it takes a given dynamic BST algorithm to perform a sequence of accesses is equivalent to the total number of such operations performed during that sequence. Given any sequence of accesses on any set of elements, there is some minimum total number of operations required to perform those accesses. We would like to come close to this minimum. 
+
+While it is impossible to implement this "God's algorithm" without foreknowledge of exactly what the access sequence will be, we can define OPT(X) as the number of operations it would perform for an access sequence X, and we can say that an algorithm is dynamically optimal if, for any X, it performs X in time O(OPT(X)) (that is, it has a constant competitive ratio).
+
+There are several data structures conjectured to have this property, but none proven. It is an open problem whether there exists a dynamically optimal data structure in this model. 
+
+### Splay trees
+
+The splay tree is a form of binary search tree invented in 1985 by Daniel Sleator and Robert Tarjan on which the standard search tree operations run in <math-expression>O(\log(n))</math-expression> amortized time. It is conjectured to be dynamically optimal in the required sense. That is, a splay tree is believed to perform any sufficiently long access sequence X in time O(OPT(X)).
+
+### Tango trees
+
+The tango tree is a data structure proposed in 2004 by Erik Demaine and others which has been proven to perform any sufficiently-long access sequence X in time <math-expression>O(\log \log n\operatorname {OPT} (X))</math-expression>. While this is not dynamically optimal, the competitive ratio of <math-expression>\log \log n</math-expression> is still very small for reasonable values of n.
+
+### Other results
+
+In 2013, John Iacono published a paper which uses the geometry of binary search trees to provide an algorithm which is dynamically optimal if any binary search tree algorithm is dynamically optimal. Nodes are interpreted as points in two dimensions, and the optimal access sequence is the smallest arborally satisfied superset of those points. Unlike splay trees and tango trees, Iacono's data structure is not known to be implementable in constant time per access sequence step, so even if it is dynamically optimal, it could still be slower than other search tree data structures by a non-constant factor. 
+
+The interleave lower bound is an asymptotic lower bound on dynamic optimality. 
+

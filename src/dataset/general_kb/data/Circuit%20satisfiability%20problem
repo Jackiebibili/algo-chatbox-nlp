@@ -1,0 +1,43 @@
+In theoretical computer science, the circuit satisfiability problem (also known as CIRCUIT-SAT, CircuitSAT, CSAT, etc.) is the decision problem of determining whether a given Boolean circuit has an assignment of its inputs that makes the output true. In other words, it asks whether the inputs to a given Boolean circuit can be consistently set to 1 or 0 such that the circuit outputs 1. If that is the case, the circuit is called satisfiable. Otherwise, the circuit is called unsatisfiable. In the figure to the right, the left circuit can be satisfied by setting both inputs to be 1, but the right circuit is unsatisfiable. 
+
+CircuitSAT is closely related to Boolean satisfiability problem (SAT), and likewise, has been proven to be NP-complete. It is a prototypical NP-complete problem; the Cook–Levin theorem is sometimes proved on CircuitSAT instead of on the SAT and then reduced to the other satisfiability problems to prove their NP-completeness. The satisfiability of a circuit containing <math-expression>m</math-expression> arbitrary binary gates can be decided in time <math-expression>O(2^{0.4058m})</math-expression>.
+
+## Proof of NP-Completeness
+
+Given a circuit and a satisfying set of inputs, one can compute the output of each gate in constant time. Hence, the output of the circuit is verifiable in polynomial time. Thus Circuit SAT belongs to complexity class NP. To show NP-hardness, it is possible to construct a reduction from 3SAT to Circuit SAT. 
+
+Suppose the original 3SAT formula has variables <math-expression>x_{1},x_{2},\dots ,x_{n}</math-expression>, and operators (AND, OR, NOT) <math-expression>y_{1},y_{2},\dots ,y_{k}</math-expression>. Design a circuit such that it has an input corresponding to every variable and a gate corresponding to every operator. Connect the gates according to the 3SAT formula. For instance, if the 3SAT formula is <math-expression>(\lnot x_{1}\land x_{2})\lor x_{3},</math-expression>the circuit will have 3 inputs, one AND, one OR, and one NOT gate. The input corresponding to <math-expression>x_{1}</math-expression>will be inverted before sending to an AND gate with <math-expression>x_{2},</math-expression>and the output of the AND gate will be sent to an OR gate with <math-expression>x_{3}.</math-expression>
+
+Notice that the 3SAT formula is equivalent to the circuit designed above, hence their output is same for same input. Hence, If the 3SAT formula has a satisfying assignment, then the corresponding circuit will output 1, and vice versa. So, this is a valid reduction, and Circuit SAT is NP-hard. 
+
+This completes the proof that Circuit SAT is NP-Complete. 
+
+## Restricted Variants and Related Problems
+
+### Planar Circuit SAT
+
+Assume that we are given a planar Boolean circuit (i.e. a Boolean circuit whose underlying graph is planar) containing only NAND gates with exactly two inputs. Planar Circuit SAT is the decision problem of determining whether this circuit has an assignment of its inputs that makes the output true. This problem is NP-complete. Moreover, if the restrictions are changed so that any gate in the circuit is a NOR gate, the resulting problem remains NP-complete.
+
+### Circuit UNSAT
+
+Circuit UNSAT is the decision problem of determining whether a given Boolean circuit outputs false for all possible assignments of its inputs. This is the complement of the Circuit SAT problem, and is therefore Co-NP-complete. 
+
+## Reduction from CircuitSAT
+
+Reduction from CircuitSAT or its variants can be used to show NP-hardness of certain problems, and provides us with an alternative to dual-rail and binary logic reductions. The gadgets that such a reduction needs to construct are: 
+
+  * A wire gadget. This gadget simulates the wires in the circuit.
+  * A split gadget. This gadget guarantees that all the output wires have the same value as the input wire.
+  * Gadgets simulating the gates of the circuit.
+  * A True terminator gadget. This gadget is used to force the output of the entire circuit to be True.
+  * A turn gadget. This gadget allows us to redirect wires in the right direction as needed.
+  * A crossover gadget. This gadget allows us to have two wires cross each other without interacting.
+
+### Minesweeper Inference Problem
+
+This problem asks whether it is possible to locate all the bombs given a Minesweeper board. It has been proven to be CoNP-Complete via a reduction from Circuit UNSAT problem. The gadgets constructed for this reduction are: wire, split, AND and NOT gates and terminator. There are three crucial observations regarding these gadgets. First, the split gadget can also be used as the NOT gadget and the turn gadget. Second, constructing AND and NOT gadgets is sufficient, because together they can simulate the universal NAND gate. Finally, since we can simulate XOR with three NANDs, and since XOR is enough to build a crossover, this gives us the needed crossover gadget. 
+
+## The Tseytin transformation
+
+The Tseytin transformation is a straightforward reduction from Circuit-SAT to SAT. The transformation is easy to describe if the circuit is wholly constructed out of 2-input NAND gates (a functionally-complete set of Boolean operators): assign every net in the circuit a variable, then for each NAND gate, construct the conjunctive normal form clauses (v1 ∨ v3) ∧ (v2 ∨ v3) ∧ (¬v1 ∨ ¬v2 ∨ ¬v3), where v1 and v2 are the inputs to the NAND gate and v3 is the output. These clauses completely describe the relationship between the three variables. Conjoining the clauses from all the gates with an additional clause constraining the circuit's output variable to be true completes the reduction; an assignment of the variables satisfying all of the constraints exists if and only if the original circuit is satisfiable, and any solution is a solution to the original problem of finding inputs that make the circuit output 1. The converse—that SAT is reducible to Circuit-SAT—follows trivially by rewriting the Boolean formula as a circuit and solving it. 
+

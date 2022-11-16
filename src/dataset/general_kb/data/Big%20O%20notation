@@ -1,0 +1,331 @@
+Big O notation is a mathematical notation that describes the limiting behavior of a function when the argument tends towards a particular value or infinity. Big O is a member of a family of notations invented by Paul Bachmann, Edmund Landau, and others, collectively called Bachmann–Landau notation or asymptotic notation. The letter O was chosen by Bachmann to stand for Ordnung, meaning the order of approximation. 
+
+In computer science, big O notation is used to classify algorithms according to how their run time or space requirements grow as the input size grows. In analytic number theory, big O notation is often used to express a bound on the difference between an arithmetical function and a better understood approximation; a famous example of such a difference is the remainder term in the prime number theorem. Big O notation is also used in many other fields to provide similar estimates. 
+
+Big O notation characterizes functions according to their growth rates: different functions with the same growth rate may be represented using the same O notation. The letter O is used because the growth rate of a function is also referred to as the order of the function. A description of a function in terms of big O notation usually only provides an upper bound on the growth rate of the function. 
+
+Associated with big O notation are several related notations, using the symbols o, Ω, ω, and Θ, to describe other kinds of bounds on asymptotic growth rates. 
+
+## Formal definition
+
+Let <math-expression>f</math-expression>, the function to be estimated, be a real or complex valued function and let <math-expression>g</math-expression>, the comparison function, be a real valued function. Let both functions be defined on some unbounded subset of the positive real numbers, and <math-expression>g(x)</math-expression> be strictly positive for all large enough values of <math-expression>x</math-expression>. One writes 
+
+if the absolute value of <math-expression>f(x)</math-expression> is at most a positive constant multiple of <math-expression>g(x)</math-expression> for all sufficiently large values of <math-expression>x</math-expression>. That is, <math-expression>f(x)=O{\bigl (}g(x){\bigr )}</math-expression> if there exists a positive real number <math-expression>M</math-expression> and a real number <math-expression>x_{0}</math-expression> such that 
+
+In many contexts, the assumption that we are interested in the growth rate as the variable <math-expression>x</math-expression> goes to infinity is left unstated, and one writes more simply that 
+
+The notation can also be used to describe the behavior of <math-expression>f</math-expression> near some real number <math-expression>a</math-expression> (often, <math-expression>a=0</math-expression>): we say 
+
+if there exist positive numbers <math-expression>\delta </math-expression> and <math-expression>M</math-expression> such that for all defined <math-expression>x</math-expression> with <math-expression>0<|x-a|<\delta </math-expression>,
+
+As <math-expression>g(x)</math-expression> is chosen to be strictly positive for such values of <math-expression>x</math-expression>, both of these definitions can be unified using the limit superior: 
+
+if 
+
+And in both of these definitions the limit point <math-expression>a</math-expression> (whether <math-expression>\infty </math-expression> or not) is a cluster point of the domains of <math-expression>f</math-expression> and <math-expression>g</math-expression>, i. e., in every neighbourhood of <math-expression>a</math-expression> there have to be infinitely many points in common. Moreover, as pointed out in the article about the limit inferior and limit superior, the <math-expression>\textstyle \limsup _{x\to a}</math-expression> (at least on the extended real number line) always exists. 
+
+In computer science, a slightly more restrictive definition is common: <math-expression>f</math-expression> and <math-expression>g</math-expression> are both required to be functions from some unbounded subset of the positive integers to the nonnegative real numbers; then <math-expression>f(x)=O{\bigl (}g(x){\bigr )}</math-expression> iff there exist positive integer numbers <math-expression>M</math-expression> and <math-expression>n_{0}</math-expression> such that <math-expression>f(n)\leq Mg(n)</math-expression> for all <math-expression>n\geq n_{0}</math-expression>.
+
+## Example
+
+In typical usage the O notation is asymptotical, that is, it refers to very large x. In this setting, the contribution of the terms that grow "most quickly" will eventually make the other ones irrelevant. As a result, the following simplification rules can be applied: 
+
+  * If f(x) is a sum of several terms, if there is one with largest growth rate, it can be kept, and all others omitted.
+  * If f(x) is a product of several factors, any constants (terms in the product that do not depend on x) can be omitted.
+
+For example, let f(x) = 6x − 2x \+ 5, and suppose we wish to simplify this function, using O notation, to describe its growth rate as x approaches infinity. This function is the sum of three terms: 6x, −2x, and 5. Of these three terms, the one with the highest growth rate is the one with the largest exponent as a function of x, namely 6x. Now one may apply the second rule: 6x is a product of 6 and x in which the first factor does not depend on x. Omitting this factor results in the simplified form x. Thus, we say that f(x) is a "big O" of x. Mathematically, we can write f(x) = O(x). One may confirm this calculation using the formal definition: let f(x) = 6x − 2x \+ 5 and g(x) = x. Applying the formal definition from above, the statement that f(x) = O(x) is equivalent to its expansion, 
+
+for some suitable choice of x0 and M and for all x > x0. To prove this, let x0 = 1 and M = 13. Then, for all x > x0: so 
+
+## Usage
+
+Big O notation has two main areas of application: 
+
+  * In mathematics, it is commonly used to describe how closely a finite series approximates a given function, especially in the case of a truncated Taylor series or asymptotic expansion
+  * In computer science, it is useful in the analysis of algorithms
+
+In both applications, the function g(x) appearing within the O(·) is typically chosen to be as simple as possible, omitting constant factors and lower order terms. 
+
+There are two formally close, but noticeably different, usages of this notation:
+
+  * infinite asymptotics
+  * infinitesimal asymptotics.
+
+This distinction is only in application and not in principle, however—the formal definition for the "big O" is the same for both cases, only with different limits for the function argument.
+
+### Infinite asymptotics
+
+Big O notation is useful when analyzing algorithms for efficiency. For example, the time (or the number of steps) it takes to complete a problem of size n might be found to be T(n) = 4n − 2n \+ 2. As n grows large, the n term will come to dominate, so that all other terms can be neglected—for instance when n = 500, the term 4n is 1000 times as large as the 2n term. Ignoring the latter would have negligible effect on the expression's value for most purposes. Further, the coefficients become irrelevant if we compare to any other order of expression, such as an expression containing a term n or n. Even if T(n) = 1,000,000n, if U(n) = n, the latter will always exceed the former once n grows larger than 1,000,000 (T(1,000,000) = 1,000,000 = U(1,000,000)). Additionally, the number of steps depends on the details of the machine model on which the algorithm runs, but different types of machines typically vary by only a constant factor in the number of steps needed to execute an algorithm. So the big O notation captures what remains: we write either 
+
+    <math-expression>T(n)=O(n^{2})</math-expression>
+
+or 
+
+    <math-expression>T(n)\in O(n^{2})</math-expression>
+
+and say that the algorithm has order of n time complexity. The sign "=" is not meant to express "is equal to" in its normal mathematical sense, but rather a more colloquial "is", so the second expression is sometimes considered more accurate (see the "Equals sign" discussion below) while the first is considered by some as an abuse of notation.
+
+### Infinitesimal asymptotics
+
+Big O can also be used to describe the error term in an approximation to a mathematical function. The most significant terms are written explicitly, and then the least-significant terms are summarized in a single big O term. Consider, for example, the exponential series and two expressions of it that are valid when x is small: 
+
+    <math-expression>{\begin{aligned}e^{x}&=1+x+{\frac {x^{2}}{2!}}+{\frac {x^{3}}{3!}}+{\frac {x^{4}}{4!}}+\dotsb &{\text{for all }}x\\[4pt]&=1+x+{\frac {x^{2}}{2}}+O(x^{3})&{\text{as }}x\to 0\\[4pt]&=1+x+O(x^{2})&{\text{as }}x\to 0\end{aligned}}</math-expression>
+
+The second expression (the one with O(x)) means the absolute-value of the error e − (1 + x \+ x/2) is at most some constant times |x| when x is close enough to 0. 
+
+## Properties
+
+If the function f can be written as a finite sum of other functions, then the fastest growing one determines the order of f(n). For example, 
+
+    <math-expression>f(n)=9\log n+5(\log n)^{4}+3n^{2}+2n^{3}=O(n^{3})\qquad {\text{as }}n\to \infty .</math-expression>
+
+In particular, if a function may be bounded by a polynomial in n, then as n tends to infinity, one may disregard lower-order terms of the polynomial. The sets O(n) and O(c) are very different. If c is greater than one, then the latter grows much faster. A function that grows faster than n for any c is called superpolynomial. One that grows more slowly than any exponential function of the form c is called subexponential. An algorithm can require time that is both superpolynomial and subexponential; examples of this include the fastest known algorithms for integer factorization and the function n. 
+
+We may ignore any powers of n inside of the logarithms. The set O(log n) is exactly the same as O(log(n)). The logarithms differ only by a constant factor (since log(n) = c log n) and thus the big O notation ignores that. Similarly, logs with different constant bases are equivalent. On the other hand, exponentials with different bases are not of the same order. For example, 2 and 3 are not of the same order. 
+
+Changing units may or may not affect the order of the resulting algorithm. Changing units is equivalent to multiplying the appropriate variable by a constant wherever it appears. For example, if an algorithm runs in the order of n, replacing n by cn means the algorithm runs in the order of cn, and the big O notation ignores the constant c. This can be written as cn = O(n). If, however, an algorithm runs in the order of 2, replacing n with cn gives 2 = (2). This is not equivalent to 2 in general. Changing variables may also affect the order of the resulting algorithm. For example, if an algorithm's run time is O(n) when measured in terms of the number n of digits of an input number x, then its run time is O(log x) when measured as a function of the input number x itself, because n = O(log x). 
+
+### Product
+
+    <math-expression>f_{1}=O(g_{1}){\text{ and }}f_{2}=O(g_{2})\Rightarrow f_{1}f_{2}=O(g_{1}g_{2})</math-expression>
+    <math-expression>f\cdot O(g)=O(fg)</math-expression>
+
+### Sum
+
+If <math-expression>f_{1}=O(g_{1})</math-expression> and <math-expression>f_{2}=O(g_{2})</math-expression> then <math-expression>f_{1}+f_{2}=O(\max(g_{1},g_{2}))</math-expression>. It follows that if <math-expression>f_{1}=O(g)</math-expression> and <math-expression>f_{2}=O(g)</math-expression> then <math-expression>f_{1}+f_{2}\in O(g)</math-expression>. In other words, this second statement says that <math-expression>O(g)</math-expression> is a convex cone. 
+
+### Multiplication by a constant
+
+Let k be a nonzero constant. Then <math-expression>O(|k|\cdot g)=O(g)</math-expression>. In other words, if <math-expression>f=O(g)</math-expression>, then <math-expression>k\cdot f=O(g).</math-expression>
+
+## Multiple variables
+
+Big O (and little o, Ω, etc.) can also be used with multiple variables. To define big O formally for multiple variables, suppose <math-expression>f</math-expression> and <math-expression>g</math-expression> are two functions defined on some subset of <math-expression>\mathbb {R} ^{n}</math-expression>. We say 
+
+    <math-expression>f(\mathbf {x} ){\text{ is }}O(g(\mathbf {x} ))\quad {\text{ as }}\mathbf {x} \to \infty </math-expression>
+
+if and only if there exist constants <math-expression>M</math-expression> and <math-expression>C>0</math-expression> such that <math-expression>|f(\mathbf {x} )|\leq C|g(\mathbf {x} )|</math-expression> for all <math-expression>\mathbf {x} </math-expression> with <math-expression>x_{i}\geq M</math-expression> for some <math-expression>i.</math-expression> Equivalently, the condition that <math-expression>x_{i}\geq M</math-expression> for some <math-expression>i</math-expression> can be written <math-expression>\|\mathbf {x} \|_{\infty }\geq M</math-expression>, where <math-expression>\|\mathbf {x} \|_{\infty }</math-expression> denotes the Chebyshev norm. For example, the statement 
+
+    <math-expression>f(n,m)=n^{2}+m^{3}+O(n+m)\quad {\text{ as }}n,m\to \infty </math-expression>
+
+asserts that there exist constants C and M such that 
+
+    <math-expression>|f(n,m)-(n^{2}+m^{3})|\leq C|n+m|</math-expression>
+
+whenever either <math-expression>m\geq M</math-expression> or <math-expression>n\geq M</math-expression> holds. This definition allows all of the coordinates of <math-expression>\mathbf {x} </math-expression> to increase to infinity. In particular, the statement 
+
+    <math-expression>f(n,m)=O(n^{m})\quad {\text{ as }}n,m\to \infty </math-expression>
+
+(i.e., <math-expression>\exists C\,\exists M\,\forall n\,\forall m\,\cdots </math-expression>) is quite different from 
+
+    <math-expression>\forall m\colon ~f(n,m)=O(n^{m})\quad {\text{ as }}n\to \infty </math-expression>
+
+(i.e., <math-expression>\forall m\,\exists C\,\exists M\,\forall n\,\cdots </math-expression>). 
+
+Under this definition, the subset on which a function is defined is significant when generalizing statements from the univariate setting to the multivariate setting. For example, if <math-expression>f(n,m)=1</math-expression> and <math-expression>g(n,m)=n</math-expression>, then <math-expression>f(n,m)=O(g(n,m))</math-expression> if we restrict <math-expression>f</math-expression> and <math-expression>g</math-expression> to <math-expression>[1,\infty )^{2}</math-expression>, but not if they are defined on <math-expression>[0,\infty )^{2}</math-expression>. 
+
+This is not the only generalization of big O to multivariate functions, and in practice, there is some inconsistency in the choice of definition.
+
+## Matters of notation
+
+### Equals sign
+
+The statement "f(x) is O(g(x))" as defined above is usually written as f(x) = O(g(x)). Some consider this to be an abuse of notation, since the use of the equals sign could be misleading as it suggests a symmetry that this statement does not have. As de Bruijn says, O(x) = O(x) is true but O(x) = O(x) is not. Knuth describes such statements as "one-way equalities", since if the sides could be reversed, "we could deduce ridiculous things like n = n from the identities n = O(n) and n = O(n)." In another letter, Knuth also pointed out that "the equality sign is not symmetric with respect to such notations", as, in this notation, "mathematicians customarily use the = sign as they use the word "is" in English: Aristotle is a man, but a man isn't necessarily Aristotle".
+
+For these reasons, it would be more precise to use set notation and write f(x) ∈ O(g(x)) (read as: "f(x) is an element of O(g(x))", or "f(x) is in the set O(g(x))"), thinking of O(g(x)) as the class of all functions h(x) such that |h(x)| ≤ C|g(x)| for some constant C. However, the use of the equals sign is customary.
+
+### Other arithmetic operators
+
+Big O notation can also be used in conjunction with other arithmetic operators in more complicated equations. For example, h(x) + O(f(x)) denotes the collection of functions having the growth of h(x) plus a part whose growth is limited to that of f(x). Thus, 
+
+    <math-expression>g(x)=h(x)+O(f(x))</math-expression>
+
+expresses the same as 
+
+    <math-expression>g(x)-h(x)=O(f(x)).</math-expression>
+
+#### Example 
+
+Suppose an algorithm is being developed to operate on a set of n elements. Its developers are interested in finding a function T(n) that will express how long the algorithm will take to run (in some arbitrary measurement of time) in terms of the number of elements in the input set. The algorithm works by first calling a subroutine to sort the elements in the set and then perform its own operations. The sort has a known time complexity of O(n), and after the subroutine runs the algorithm must take an additional 55n \+ 2n \+ 10 steps before it terminates. Thus the overall time complexity of the algorithm can be expressed as T(n) = 55n \+ O(n). Here the terms 2n \+ 10 are subsumed within the faster-growing O(n). Again, this usage disregards some of the formal meaning of the "=" symbol, but it does allow one to use the big O notation as a kind of convenient placeholder. 
+
+### Multiple uses
+
+In more complicated usage, O(·) can appear in different places in an equation, even several times on each side. For example, the following are true for <math-expression>n\to \infty </math-expression>: 
+
+The meaning of such statements is as follows: for any functions which satisfy each O(·) on the left side, there are some functions satisfying each O(·) on the right side, such that substituting all these functions into the equation makes the two sides equal. For example, the third equation above means: "For any function f(n) = O(1), there is some function g(n) = O(e) such that n = g(n)." In terms of the "set notation" above, the meaning is that the class of functions represented by the left side is a subset of the class of functions represented by the right side. In this use the "=" is a formal symbol that unlike the usual use of "=" is not a symmetric relation. Thus for example n = O(e) does not imply the false statement O(e) = n. 
+
+### Typesetting
+
+Big O is typeset as an italicized uppercase "O", as in the following example: <math-expression>O(n^{2})</math-expression>. In TeX, it is produced by simply typing O inside math mode. Unlike Greek-named Bachmann–Landau notations, it needs no special symbol. Yet, some authors use the calligraphic variant <math-expression>{\mathcal {O}}</math-expression> instead.
+
+## Orders of common functions
+
+Here is a list of classes of functions that are commonly encountered when analyzing the running time of an algorithm. In each case, c is a positive constant and n increases without bound. The slower-growing functions are generally listed first. 
+
+The statement <math-expression>f(n)=O(n!)</math-expression> is sometimes weakened to <math-expression>f(n)=O\left(n^{n}\right)</math-expression> to derive simpler formulas for asymptotic complexity. For any <math-expression>k>0</math-expression> and <math-expression>c>0</math-expression>, <math-expression>O(n^{c}(\log n)^{k})</math-expression> is a subset of <math-expression>O(n^{c+\varepsilon })</math-expression> for any <math-expression>\varepsilon >0</math-expression>, so may be considered as a polynomial with some bigger order. 
+
+## Related asymptotic notations
+
+Big O is widely used in computer science. Together with some other related notations it forms the family of Bachmann–Landau notations.
+
+### Little-o notation
+
+Intuitively, the assertion "f(x) is o(g(x))" (read "f(x) is little-o of g(x)") means that g(x) grows much faster than f(x). As before, let f be a real or complex valued function and g a real valued function, both defined on some unbounded subset of the positive real numbers, such that g(x) is strictly positive for all large enough values of x. One writes 
+
+    <math-expression>f(x)=o(g(x))\quad {\text{ as }}x\to \infty </math-expression>
+
+if for every positive constant ε there exists a constant <math-expression>x_{0}</math-expression> such that 
+
+    <math-expression>|f(x)|\leq \varepsilon g(x)\quad {\text{ for all }}x\geq x_{0}.</math-expression>
+
+For example, one has 
+
+    <math-expression>2x=o(x^{2})</math-expression> and <math-expression>1/x=o(1),</math-expression> both as <math-expression>x\to \infty .</math-expression>
+
+The difference between the definition of the big-O notation and the definition of little-o is that while the former has to be true for at least one constant M, the latter must hold for every positive constant ε, however small. In this way, little-o notation makes a stronger statement than the corresponding big-O notation: every function that is little-o of g is also big-O of g, but not every function that is big-O of g is also little-o of g. For example, <math-expression>2x^{2}=O(x^{2})</math-expression> but <math-expression>2x^{2}\neq o(x^{2})</math-expression>.
+
+As g(x) is nonzero, or at least becomes nonzero beyond a certain point, the relation <math-expression>f(x)=o(g(x))</math-expression> is equivalent to 
+
+    <math-expression>\lim _{x\to \infty }{\frac {f(x)}{g(x)}}=0</math-expression> (and this is in fact how Landau originally defined the little-o notation).
+
+Little-o respects a number of arithmetic operations. For example, 
+
+    if c is a nonzero constant and <math-expression>f=o(g)</math-expression> then <math-expression>c\cdot f=o(g)</math-expression>, and
+    if <math-expression>f=o(F)</math-expression> and <math-expression>g=o(G)</math-expression> then <math-expression>f\cdot g=o(F\cdot G).</math-expression>
+
+It also satisfies a transitivity relation: 
+
+    if <math-expression>f=o(g)</math-expression> and <math-expression>g=o(h)</math-expression> then <math-expression>f=o(h).</math-expression>
+
+### Big Omega notation
+
+Another asymptotic notation is <math-expression>\Omega </math-expression>, read "big omega". There are two widespread and incompatible definitions of the statement 
+
+    <math-expression>f(x)=\Omega (g(x))</math-expression> as <math-expression>x\to a</math-expression>,
+
+where a is some real number, ∞, or −∞, where f and g are real functions defined in a neighbourhood of a, and where g is positive in this neighbourhood. 
+
+The Hardy–Littlewood definition is used mainly in analytic number theory, and the Knuth definition mainly in computational complexity theory; the definitions are not equivalent. 
+
+#### The Hardy–Littlewood definition
+
+In 1914 Godfrey Harold Hardy and John Edensor Littlewood introduced the new symbol <math-expression>\Omega </math-expression>, which is defined as follows: 
+
+    <math-expression>f(x)=\Omega (g(x))</math-expression> as <math-expression>x\to \infty </math-expression> if <math-expression>\limsup _{x\to \infty }\left|{\frac {f(x)}{g(x)}}\right|>0.</math-expression>
+
+Thus <math-expression>f(x)=\Omega (g(x))</math-expression> is the negation of <math-expression>f(x)=o(g(x))</math-expression>. 
+
+In 1916 the same authors introduced the two new symbols <math-expression>\Omega _{R}</math-expression> and <math-expression>\Omega _{L}</math-expression>, defined as:
+
+    <math-expression>f(x)=\Omega _{R}(g(x))</math-expression> as <math-expression>x\to \infty </math-expression> if <math-expression>\limsup _{x\to \infty }{\frac {f(x)}{g(x)}}>0</math-expression>;
+
+    <math-expression>f(x)=\Omega _{L}(g(x))</math-expression> as <math-expression>x\to \infty </math-expression> if <math-expression>\liminf _{x\to \infty }{\frac {f(x)}{g(x)}}<0.</math-expression>
+
+These symbols were used by Edmund Landau, with the same meanings, in 1924. After Landau, the notations were never used again exactly thus; <math-expression>\Omega _{R}</math-expression> became <math-expression>\Omega _{+}</math-expression> and <math-expression>\Omega _{L}</math-expression> became <math-expression>\Omega _{-}</math-expression>.
+
+These three symbols <math-expression>\Omega ,\Omega _{+},\Omega _{-}</math-expression>, as well as <math-expression>f(x)=\Omega _{\pm }(g(x))</math-expression> (meaning that <math-expression>f(x)=\Omega _{+}(g(x))</math-expression> and <math-expression>f(x)=\Omega _{-}(g(x))</math-expression> are both satisfied), are now currently used in analytic number theory.
+
+##### Simple examples
+
+We have 
+
+    <math-expression>\sin x=\Omega (1)</math-expression> as <math-expression>x\to \infty ,</math-expression>
+
+and more precisely 
+
+    <math-expression>\sin x=\Omega _{\pm }(1)</math-expression> as <math-expression>x\to \infty .</math-expression>
+
+We have 
+
+    <math-expression>\sin x+1=\Omega (1)</math-expression> as <math-expression>x\to \infty ,</math-expression>
+
+and more precisely 
+
+    <math-expression>\sin x+1=\Omega _{+}(1)</math-expression> as <math-expression>x\to \infty ;</math-expression>
+
+however 
+
+    <math-expression>\sin x+1\not =\Omega _{-}(1)</math-expression> as <math-expression>x\to \infty .</math-expression>
+
+#### The Knuth definition
+
+In 1976 Donald Knuth published a paper to justify his use of the <math-expression>\Omega </math-expression>-symbol to describe a stronger property. Knuth wrote: "For all the applications I have seen so far in computer science, a stronger requirement ... is much more appropriate". He defined 
+
+    <math-expression>f(x)=\Omega (g(x))\Leftrightarrow g(x)=O(f(x))</math-expression>
+
+with the comment: "Although I have changed Hardy and Littlewood's definition of <math-expression>\Omega </math-expression>, I feel justified in doing so because their definition is by no means in wide use, and because there are other ways to say what they want to say in the comparatively rare cases when their definition applies."
+
+### Family of Bachmann–Landau notations
+
+The limit definitions assume <math-expression>g(n)>0</math-expression> for sufficiently large <math-expression>n</math-expression>. The table is (partly) sorted from smallest to largest, in the sense that <math-expression>o,O,\Theta ,\sim ,</math-expression> (Knuth's version of) <math-expression>\Omega ,\omega </math-expression> on functions correspond to <math-expression><,\leq ,\approx ,=,</math-expression><math-expression>\geq ,></math-expression> on the real line (the Hardy–Littlewood version of <math-expression>\Omega </math-expression>, however, doesn't correspond to any such description). 
+
+Computer science uses the big <math-expression>O</math-expression>, big Theta <math-expression>\Theta </math-expression>, little <math-expression>o</math-expression>, little omega <math-expression>\omega </math-expression> and Knuth's big Omega <math-expression>\Omega </math-expression> notations. Analytic number theory often uses the big <math-expression>O</math-expression>, small <math-expression>o</math-expression>, Hardy–Littlewood's big Omega <math-expression>\Omega </math-expression> (with or without the +, − or ± subscripts) and <math-expression>\sim </math-expression> notations. The small omega <math-expression>\omega </math-expression> notation is not used as often in analysis.
+
+### Use in computer science
+
+Informally, especially in computer science, the big O notation often can be used somewhat differently to describe an asymptotic tight bound where using big Theta Θ notation might be more factually appropriate in a given context. For example, when considering a function T(n) = 73n \+ 22n \+ 58, all of the following are generally acceptable, but tighter bounds (such as numbers 2 and 3 below) are usually strongly preferred over looser bounds (such as number 1 below). 
+
+  1. T(n) = O(n)
+  2. T(n) = O(n)
+  3. T(n) = Θ(n)
+
+The equivalent English statements are respectively: 
+
+  1. T(n) grows asymptotically no faster than n
+  2. T(n) grows asymptotically no faster than n
+  3. T(n) grows asymptotically as fast as n.
+
+So while all three statements are true, progressively more information is contained in each. In some fields, however, the big O notation (number 2 in the lists above) would be used more commonly than the big Theta notation (items numbered 3 in the lists above). For example, if T(n) represents the running time of a newly developed algorithm for input size n, the inventors and users of the algorithm might be more inclined to put an upper asymptotic bound on how long it will take to run without making an explicit statement about the lower asymptotic bound. 
+
+### Other notation
+
+In their book Introduction to Algorithms, Cormen, Leiserson, Rivest and Stein consider the set of functions f which satisfy 
+
+    <math-expression>f(n)=O(g(n))\quad (n\to \infty )~.</math-expression>
+
+In a correct notation this set can, for instance, be called O(g), where 
+
+    <math-expression>O(g)=\{f:{\text{there exist positive constants}}~c~{\text{and}}~n_{0}~{\text{such that}}~0\leq f(n)\leq cg(n){\text{ for all }}n\geq n_{0}\}.</math-expression>
+
+The authors state that the use of equality operator (=) to denote set membership rather than the set membership operator (∈) is an abuse of notation, but that doing so has advantages. Inside an equation or inequality, the use of asymptotic notation stands for an anonymous function in the set O(g), which eliminates lower-order terms, and helps to reduce inessential clutter in equations, for example:
+
+    <math-expression>2n^{2}+3n+1=2n^{2}+O(n).</math-expression>
+
+### Extensions to the Bachmann–Landau notations
+
+Another notation sometimes used in computer science is Õ (read soft-O): f(n) = Õ(g(n)) is shorthand for f(n) = O(g(n) log n) for some k. Some authors write O for the same purpose. Essentially, it is big O notation, ignoring logarithmic factors because the growth-rate effects of some other super-logarithmic function indicate a growth-rate explosion for large-sized input parameters that is more important to predicting bad run-time performance than the finer-point effects contributed by the logarithmic-growth factor(s). This notation is often used to obviate the "nitpicking" within growth-rates that are stated as too tightly bounded for the matters at hand (since log n is always o(n) for any constant k and any ε > 0). 
+
+Also the L notation, defined as 
+
+    <math-expression>L_{n}[\alpha ,c]=e^{(c+o(1))(\ln n)^{\alpha }(\ln \ln n)^{1-\alpha }}</math-expression>
+
+is convenient for functions that are between polynomial and exponential in terms of <math-expression>\ln n</math-expression>.
+
+## Generalizations and related usages
+
+The generalization to functions taking values in any normed vector space is straightforward (replacing absolute values by norms), where f and g need not take their values in the same space. A generalization to functions g taking values in any topological group is also possible. The "limiting process" x → xo can also be generalized by introducing an arbitrary filter base, i.e. to directed nets f and g. The o notation can be used to define derivatives and differentiability in quite general spaces, and also (asymptotical) equivalence of functions, 
+
+    <math-expression>f\sim g\iff (f-g)\in o(g)</math-expression>
+
+which is an equivalence relation and a more restrictive notion than the relationship "f is Θ(g)" from above. (It reduces to lim f / g = 1 if f and g are positive real valued functions.) For example, 2x is Θ(x), but 2x − x is not o(x). 
+
+## History (Bachmann–Landau, Hardy, and Vinogradov notations)
+
+The symbol O was first introduced by number theorist Paul Bachmann in 1894, in the second volume of his book Analytische Zahlentheorie ("analytic number theory"). The number theorist Edmund Landau adopted it, and was thus inspired to introduce in 1909 the notation o; hence both are now called Landau symbols. These notations were used in applied mathematics during the 1950s for asymptotic analysis. The symbol <math-expression>\Omega </math-expression> (in the sense "is not an o of") was introduced in 1914 by Hardy and Littlewood. Hardy and Littlewood also introduced in 1916 the symbols <math-expression>\Omega _{R}</math-expression> ("right") and <math-expression>\Omega _{L}</math-expression> ("left"), precursors of the modern symbols <math-expression>\Omega _{+}</math-expression> ("is not smaller than a small o of") and <math-expression>\Omega _{-}</math-expression> ("is not larger than a small o of"). Thus the Omega symbols (with their original meanings) are sometimes also referred to as "Landau symbols". This notation <math-expression>\Omega </math-expression> became commonly used in number theory at least since the 1950s. In the 1970s the big O was popularized in computer science by Donald Knuth, who introduced the related Theta notation, and proposed a different definition for the Omega notation.
+
+Landau never used the big Theta and small omega symbols. 
+
+Hardy's symbols were (in terms of the modern O notation) 
+
+    <math-expression>f\preccurlyeq g\iff f\in O(g)</math-expression> and <math-expression>f\prec g\iff f\in o(g);</math-expression>
+
+(Hardy however never defined or used the notation <math-expression>\prec \!\!\prec </math-expression>, nor <math-expression>\ll </math-expression>, as it has been sometimes reported). Hardy introduced the symbols <math-expression>\preccurlyeq </math-expression> and <math-expression>\prec </math-expression> (as well as some other symbols) in his 1910 tract "Orders of Infinity", and made use of them only in three papers (1910–1913). In his nearly 400 remaining papers and books he consistently used the Landau symbols O and o. 
+
+Hardy's notation is not used anymore. On the other hand, in the 1930s, the Russian number theorist Ivan Matveyevich Vinogradov introduced his notation <math-expression>\ll </math-expression>, which has been increasingly used in number theory instead of the <math-expression>O</math-expression> notation. We have 
+
+    <math-expression>f\ll g\iff f\in O(g),</math-expression>
+
+and frequently both notations are used in the same paper. 
+
+The big-O originally stands for "order of" ("Ordnung", Bachmann 1894), and is thus a Latin letter. Neither Bachmann nor Landau ever call it "Omicron". The symbol was much later on (1976) viewed by Knuth as a capital omicron, probably in reference to his definition of the symbol Omega. The digit zero should not be used. 
+

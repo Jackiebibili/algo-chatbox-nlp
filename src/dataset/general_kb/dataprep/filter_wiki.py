@@ -4,12 +4,16 @@ sections_skipped = [
    "See also",
    "Notes",
    "References",
-   "External links"
+   "External links",
+   "Original papers",
+   "Original sources",
+   "Secondary sources",
+   "Further reading",
    ]
 
 
 def get_regex(section_title: str):
-   return re.compile(rf"## {section_title}[^#]*?(?=(##)|(\Z))")
+   return re.compile(rf"#{{2,3}} {section_title}(.|\n)*?(?=(#{{2,3}})|(\Z))")
 
 
 def filter_wiki_content_helper(text: str, section_title: str):

@@ -1,0 +1,78 @@
+In computer science, the maximum sum subarray problem, also known as the maximum segment sum problem, is the task of finding a contiguous subarray with the largest sum, within a given one-dimensional array A[1...n] of numbers. Formally, the task is to find indices <math-expression>i</math-expression> and <math-expression>j</math-expression> with <math-expression>1\leq i\leq j\leq n</math-expression>, such that the sum 
+
+    <math-expression>\sum _{x=i}^{j}A[x]</math-expression>
+
+is as large as possible. (Some formulations of the problem also allow the empty subarray to be considered; by convention, the sum of all values of the empty subarray is zero.) Each number in the input array A could be positive, negative, or zero.
+
+For example, for the array of values [−2, 1, −3, 4, −1, 2, 1, −5, 4], the contiguous subarray with the largest sum is [4, −1, 2, 1], with sum 6. 
+
+Some properties of this problem are: 
+
+  1. If the array contains all non-negative numbers, then the problem is trivial; a maximum subarray is the entire array.
+  2. If the array contains all non-positive numbers, then a solution is any subarray of size 1 containing the maximal value of the array (or the empty subarray, if it is permitted).
+  3. Several different sub-arrays may have the same maximum sum.
+
+This problem can be solved using several different algorithmic techniques, including brute force, divide and conquer, dynamic programming, and reduction to shortest paths.
+
+## History
+
+The maximum subarray problem was proposed by Ulf Grenander in 1977 as a simplified model for maximum likelihood estimation of patterns in digitized images.
+
+Grenander was looking to find a rectangular subarray with maximum sum, in a two-dimensional array of real numbers. A brute-force algorithm for the two-dimensional problem runs in O(n) time; because this was prohibitively slow, Grenander proposed the one-dimensional problem to gain insight into its structure. Grenander derived an algorithm that solves the one-dimensional problem in O(n) time, improving the brute force running time of O(n). When Michael Shamos heard about the problem, he overnight devised an O(n log n) divide-and-conquer algorithm for it. Soon after, Shamos described the one-dimensional problem and its history at a Carnegie Mellon University seminar attended by Jay Kadane, who designed within a minute an O(n)-time algorithm, which is as fast as possible. In 1982, David Gries obtained the same O(n)-time algorithm by applying Dijkstra's "standard strategy"; in 1989, Richard Bird derived it by purely algebraic manipulation of the brute-force algorithm using the Bird–Meertens formalism.
+
+Grenander's two-dimensional generalization can be solved in O(n) time either by using Kadane's algorithm as a subroutine, or through a divide-and-conquer approach. Slightly faster algorithms based on distance matrix multiplication have been proposed by Tamaki & Tokuyama (1998) and by Takaoka (2002). There is some evidence that no significantly faster algorithm exists; an algorithm that solves the two-dimensional maximum subarray problem in O(n) time, for any ε>0, would imply a similarly fast algorithm for the all-pairs shortest paths problem.
+
+## Applications
+
+Maximum subarray problems arise in many fields, such as genomic sequence analysis and computer vision. 
+
+Genomic sequence analysis employs maximum subarray algorithms to identify important biological segments of protein sequences. These problems include conserved segments, GC-rich regions, tandem repeats, low-complexity filter, DNA binding domains, and regions of high charge.
+
+In computer vision, maximum-subarray algorithms are used on bitmap images to detect the brightest area in an image. 
+
+## Kadane's algorithm
+
+### Empty subarrays admitted
+
+Kadane's original algorithm solves the problem version when empty subarrays are admitted. It scans the given array <math-expression>A[1\ldots n]</math-expression> from left to right. In the <math-expression>j</math-expression>th step, it computes the subarray with the largest sum ending at <math-expression>j</math-expression>; this sum is maintained in variable current_sum. Moreover, it computes the subarray with the largest sum anywhere in <math-expression>A[1\ldots j]</math-expression>, maintained in variable best_sum, and easily obtained as the maximum of all values of current_sum seen so far, cf. line 7 of the algorithm. 
+
+As a loop invariant, in the <math-expression>j</math-expression>th step, the old value of current_sum holds the maximum over all <math-expression>i\in \{1,\ldots ,j\}</math-expression> of the sum <math-expression>A[i]+\cdots +A[j-1]</math-expression>. Therefore, current_sum<math-expression>+A[j]</math-expression> is the maximum over all <math-expression>i\in \{1,\ldots ,j\}</math-expression> of the sum <math-expression>A[i]+\cdots +A[j]</math-expression>. To extend the latter maximum to cover also the case <math-expression>i=j+1</math-expression>, it is sufficient to consider also the empty subarray <math-expression>A[j+1\;\ldots \;j]</math-expression>. This is done in line 6 by assigning <math-expression>\max(0,</math-expression>current_sum<math-expression>+A[j])</math-expression> as the new value of current_sum, which after that holds the maximum over all <math-expression>i\in \{1,\ldots ,j+1\}</math-expression> of the sum <math-expression>A[i]+\cdots +A[j]</math-expression>. 
+
+Thus, the problem can be solved with the following code, expressed here in Python: 
+
+This version of the algorithm will return 0 if the input contains no positive elements (including when the input is empty). 
+
+### No empty subarrays admitted
+
+For the variant of the problem which disallows empty subarrays, best_sum should be initialized to negative infinity instead and also in the for loop current_sum should be updated as max(x, current_sum + x). In that case, if the input contains no positive element, the returned value is that of the largest element (i.e., the value closest to 0), or negative infinity if the input was empty. For correctness, an exception should be raised when the input array is empty, since an empty array has no maximum subarray: 
+
+### Conditionally admitting empty subarrays
+
+The only case when it matters if empty subarrays are admitted, is if all numbers in the input array are negative. In this case, the maximum subarray will either be empty (when empty subarrays are allowed), or contain the largest number in the input array (when empty subarrays are not allowed). 
+
+An alternative algorithm that admits empty subarrays is easily developed from the algorithm given above which does not admit empty subarrays: The only change that is needed is to return max(best_sum, 0) instead of best_sum. It can be seen that this version is correct: 
+
+  * For an empty input array the previous algorithm will return minus infinity, so this algorithm will return zero, which corresponds to the sum of elements of an empty subarray.
+  * For an input array with only negative numbers, the previous algorithm will return the largest of the integers, which is negative. So this algorithm will return zero, which corresponds to the sum of elements of an empty subarray.
+  * For all other cases, there is at least one nonnegative integer in the output, so there is a nonempty subarray for which the sum of the elements is at least 0. Since the sum of the elements is always zero for empty subarrays, it doesn't matter if empty subarrays are admitted or not, so this algorithm correctly returns the same answer as the previous algorithm gives.
+
+This algorithm can also be converted to a version that conditionally admits empty subarrays, based on a parameter: If empty subarrays are admitted, return max(0, best_sum), otherwise, return best_sum. An exception should be raised the input array is empty but empty subarrays are not admitted: 
+
+### Computing the best subarray's position
+
+The algorithm can be modified to keep track of the starting and ending indices of the maximum subarray as well: 
+
+In Python, arrays are indexed starting from 0, and slices exclude the endpoint, so that the subarray [22, 33] in the array a=[-11, 22, 33, -44] would be expressed as a[1:3]. 
+
+### Complexity
+
+Because of the way this algorithm uses optimal substructures (the maximum subarray ending at each position is calculated in a simple way from a related but smaller and overlapping subproblem: the maximum subarray ending at the previous position) this algorithm can be viewed as a simple/trivial example of dynamic programming. 
+
+The runtime complexity of Kadane's algorithm is <math-expression>O(n)</math-expression>.
+
+## Generalizations
+
+Similar problems may be posed for higher-dimensional arrays, but their solutions are more complicated; see, e.g., Takaoka (2002). Brodal & Jørgensen (2007) showed how to find the k largest subarray sums in a one-dimensional array, in the optimal time bound <math-expression>O(n+k)</math-expression>. 
+
+The Maximum sum k-disjoint subarrays can also be computed in the optimal time bound <math-expression>O(n+k)</math-expression> .
+

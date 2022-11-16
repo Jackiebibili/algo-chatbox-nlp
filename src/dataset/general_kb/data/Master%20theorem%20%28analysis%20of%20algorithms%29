@@ -1,0 +1,131 @@
+In the analysis of algorithms, the master theorem for divide-and-conquer recurrences provides an asymptotic analysis (using Big O notation) for recurrence relations of types that occur in the analysis of many divide and conquer algorithms. The approach was first presented by Jon Bentley, Dorothea Blostein (née Haken), and James B. Saxe in 1980, where it was described as a "unifying method" for solving such recurrences. The name "master theorem" was popularized by the widely used algorithms textbook Introduction to Algorithms by Cormen, Leiserson, Rivest, and Stein. 
+
+Not all recurrence relations can be solved with the use of this theorem; its generalizations include the Akra–Bazzi method. 
+
+## Introduction
+
+Consider a problem that can be solved using a recursive algorithm such as the following: 
+    
+    
+    procedure p(input x of size n):
+        if n < some constant k:
+            Solve x directly without recursion
+        else:
+            Create a subproblems of x, each having size n/b
+            Call procedure p recursively on each subproblem
+            Combine the results from the subproblems
+    
+
+The above algorithm divides the problem into a number of subproblems recursively, each subproblem being of size n/b. Its solution tree has a node for each recursive call, with the children of that node being the other calls made from that call. The leaves of the tree are the base cases of the recursion, the subproblems (of size less than k) that do not recurse. The above example would have a child nodes at each non-leaf node. Each node does an amount of work that corresponds to the size of the sub problem n passed to that instance of the recursive call and given by <math-expression>f(n)</math-expression>. The total amount of work done by the entire algorithm is the sum of the work performed by all the nodes in the tree. 
+
+The runtime of an algorithm such as the 'p' above on an input of size 'n', usually denoted <math-expression>T(n)</math-expression>, can be expressed by the recurrence relation 
+
+    <math-expression>T(n)=a\;T\left({\frac {n}{b}}\right)+f(n),</math-expression>
+
+where <math-expression>f(n)</math-expression> is the time to create the subproblems and combine their results in the above procedure. This equation can be successively substituted into itself and expanded to obtain an expression for the total amount of work done. The master theorem allows many recurrence relations of this form to be converted to Θ-notation directly, without doing an expansion of the recursive relation. 
+
+## Generic form
+
+The master theorem always yields asymptotically tight bounds to recurrences from divide and conquer algorithms that partition an input into smaller subproblems of equal sizes, solve the subproblems recursively, and then combine the subproblem solutions to give a solution to the original problem. The time for such an algorithm can be expressed by adding the work that they perform at the top level of their recursion (to divide the problems into subproblems and then combine the subproblem solutions) together with the time made in the recursive calls of the algorithm. If <math-expression>T(n)</math-expression> denotes the total time for the algorithm on an input of size <math-expression>n</math-expression>, and <math-expression>f(n)</math-expression> denotes the amount of time taken at the top level of the recurrence then the time can be expressed by a recurrence relation that takes the form: 
+
+    <math-expression>T(n)=a\;T\!\left({\frac {n}{b}}\right)+f(n)</math-expression>
+
+Here <math-expression>n</math-expression> is the size of an input problem, <math-expression>a</math-expression> is the number of subproblems in the recursion, and <math-expression>b</math-expression> is the factor by which the subproblem size is reduced in each recursive call (b>1). Crucially, <math-expression>a</math-expression> and <math-expression>b</math-expression> must not depend on <math-expression>n</math-expression>. The theorem below also assumes that, as a base case for the recurrence, <math-expression>T(n)=\Theta (1)</math-expression> when <math-expression>n</math-expression> is less than some bound <math-expression>\kappa >0</math-expression>, the smallest input size that will lead to a recursive call. 
+
+Recurrences of this form often satisfy one of the three following regimes, based on how the work to split/recombine the problem <math-expression>f(n)</math-expression> relates to the critical exponent <math-expression>c_{\operatorname {crit} }=\log _{b}a</math-expression>. (The table below uses standard big O notation.) 
+
+    <math-expression>c_{\operatorname {crit} }=\log _{b}a=\log(\#{\text{subproblems}})/\log({\text{relative subproblem size}})</math-expression>
+
+A useful extension of Case 2 handles all values of <math-expression>k</math-expression>:
+
+### Examples
+
+#### Case 1 example
+
+    <math-expression>T(n)=8T\left({\frac {n}{2}}\right)+1000n^{2}</math-expression>
+
+As one can see from the formula above: 
+
+    <math-expression>a=8,\,b=2,\,f(n)=1000n^{2}</math-expression>, so
+    <math-expression>f(n)=O\left(n^{c}\right)</math-expression>, where <math-expression>c=2</math-expression>
+
+Next, we see if we satisfy the case 1 condition: 
+
+    <math-expression>\log _{b}a=\log _{2}8=3>c</math-expression>.
+
+It follows from the first case of the master theorem that 
+
+    <math-expression>T(n)=\Theta \left(n^{\log _{b}a}\right)=\Theta \left(n^{3}\right)</math-expression>
+
+(This result is confirmed by the exact solution of the recurrence relation, which is <math-expression>T(n)=1001n^{3}-1000n^{2}</math-expression>, assuming <math-expression>T(1)=1</math-expression>). 
+
+#### Case 2 example
+
+<math-expression>T(n)=2T\left({\frac {n}{2}}\right)+10n</math-expression>
+
+As we can see in the formula above the variables get the following values: 
+
+    <math-expression>a=2,\,b=2,\,c=1,\,f(n)=10n</math-expression>
+    <math-expression>f(n)=\Theta \left(n^{c}\log ^{k}n\right)</math-expression> where <math-expression>c=1,k=0</math-expression>
+
+Next, we see if we satisfy the case 2 condition: 
+
+    <math-expression>\log _{b}a=\log _{2}2=1</math-expression>, and therefore, c and <math-expression>log_{b}a</math-expression> are equal
+
+So it follows from the second case of the master theorem: 
+
+    <math-expression>T(n)=\Theta \left(n^{\log _{b}a}\log ^{k+1}n\right)=\Theta \left(n^{1}\log ^{1}n\right)=\Theta \left(n\log n\right)</math-expression>
+
+Thus the given recurrence relation T(n) was in Θ(n log n). 
+
+(This result is confirmed by the exact solution of the recurrence relation, which is <math-expression>T(n)=n+10n\log _{2}n</math-expression>, assuming <math-expression>T(1)=1</math-expression>.) 
+
+#### Case 3 example
+
+    <math-expression>T(n)=2T\left({\frac {n}{2}}\right)+n^{2}</math-expression>
+
+As we can see in the formula above the variables get the following values: 
+
+    <math-expression>a=2,\,b=2,\,f(n)=n^{2}</math-expression>
+    <math-expression>f(n)=\Omega \left(n^{c}\right)</math-expression>, where <math-expression>c=2</math-expression>
+
+Next, we see if we satisfy the case 3 condition: 
+
+    <math-expression>\log _{b}a=\log _{2}2=1</math-expression>, and therefore, yes, <math-expression>c>\log _{b}a</math-expression>
+
+The regularity condition also holds: 
+
+    <math-expression>2\left({\frac {n^{2}}{4}}\right)\leq kn^{2}</math-expression>, choosing <math-expression>k=1/2</math-expression>
+
+So it follows from the third case of the master theorem: 
+
+    <math-expression>T\left(n\right)=\Theta \left(f(n)\right)=\Theta \left(n^{2}\right).</math-expression>
+
+Thus the given recurrence relation <math-expression>T(n)</math-expression> was in <math-expression>\Theta (n^{2})</math-expression>, that complies with the <math-expression>f(n)</math-expression> of the original formula. 
+
+(This result is confirmed by the exact solution of the recurrence relation, which is <math-expression>T(n)=2n^{2}-n</math-expression>, assuming <math-expression>T(1)=1</math-expression>.) 
+
+## Inadmissible equations
+
+The following equations cannot be solved using the master theorem:
+
+  * <math-expression>T(n)=2^{n}T\left({\frac {n}{2}}\right)+n^{n}</math-expression>
+
+    a is not a constant; the number of subproblems should be fixed
+  * <math-expression>T(n)=2T\left({\frac {n}{2}}\right)+{\frac {n}{\log n}}</math-expression>
+
+    non-polynomial difference between <math-expression>f(n)</math-expression> and <math-expression>n^{\log _{b}a}</math-expression> (see below; extended version applies)
+  * <math-expression>T(n)=0.5T\left({\frac {n}{2}}\right)+n</math-expression>
+
+    <math-expression>a<1</math-expression> cannot have less than one sub problem
+  * <math-expression>T(n)=64T\left({\frac {n}{8}}\right)-n^{2}\log n</math-expression>
+
+    <math-expression>f(n)</math-expression>, which is the combination time, is not positive
+  * <math-expression>T(n)=T\left({\frac {n}{2}}\right)+n(2-\cos n)</math-expression>
+
+    case 3 but regularity violation.
+
+In the second inadmissible example above, the difference between <math-expression>f(n)</math-expression> and <math-expression>n^{\log _{b}a}</math-expression> can be expressed with the ratio <math-expression>{\frac {f(n)}{n^{\log _{b}a}}}={\frac {n/\log n}{n^{\log _{2}2}}}={\frac {n}{n\log n}}={\frac {1}{\log n}}</math-expression>. It is clear that <math-expression>{\frac {1}{\log n}}<n^{\epsilon }</math-expression> for any constant <math-expression>\epsilon >0</math-expression>. Therefore, the difference is not polynomial and the basic form of the Master Theorem does not apply. The extended form (case 2b) does apply, giving the solution <math-expression>T(n)=\Theta (n\log \log n)</math-expression>. 
+
+## Application to common algorithms
+

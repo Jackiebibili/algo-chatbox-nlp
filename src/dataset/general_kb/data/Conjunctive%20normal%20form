@@ -1,0 +1,86 @@
+In Boolean logic, a formula is in conjunctive normal form (CNF) or clausal normal form if it is a conjunction of one or more clauses, where a clause is a disjunction of literals; otherwise put, it is a product of sums or an AND of ORs. As a canonical normal form, it is useful in automated theorem proving and circuit theory. 
+
+All conjunctions of literals and all disjunctions of literals are in CNF, as they can be seen as conjunctions of one-literal clauses and conjunctions of a single clause, respectively. As in the disjunctive normal form (DNF), the only propositional connectives a formula in CNF can contain are and, or, and not. The not operator can only be used as part of a literal, which means that it can only precede a propositional variable or a predicate symbol. 
+
+In automated theorem proving, the notion "clausal normal form" is often used in a narrower sense, meaning a particular representation of a CNF formula as a set of sets of literals. 
+
+## Examples and non-examples
+
+All of the following formulas in the variables <math-expression>A,B,C,D,E</math-expression>, and <math-expression>F</math-expression> are in conjunctive normal form: 
+
+  * <math-expression>(A\lor \neg B\lor \neg C)\land (\neg D\lor E\lor F)</math-expression>
+  * <math-expression>(A\lor B)\land (C)</math-expression>
+  * <math-expression>(A\lor B)</math-expression>
+  * <math-expression>(A)</math-expression>
+
+For clarity, the disjunctive clauses are written inside parentheses above. In disjunctive normal form with parenthesized conjunctive clauses, the last case is the same, but the next to last is <math-expression>(A)\lor (B)</math-expression>. The constants true and false are denoted by the empty conjunct and one clause consisting of the empty disjunct, but are normally written explicitly.
+
+The following formulas are not in conjunctive normal form: 
+
+  * <math-expression>\neg (B\lor C)</math-expression>, since an OR is nested within a NOT
+  * <math-expression>(A\land B)\lor C</math-expression>
+  * <math-expression>A\land (B\lor (D\land E))</math-expression>, since an AND is nested within an OR
+
+Every formula can be equivalently written as a formula in conjunctive normal form. The three non-examples in CNF are: 
+
+  * <math-expression>(\neg B)\land (\neg C)</math-expression>
+  * <math-expression>(A\lor C)\land (B\lor C)</math-expression>
+  * <math-expression>(A)\land (B\lor D)\land (B\lor E).</math-expression>
+
+## Conversion into CNF
+
+Every propositional formula can be converted into an equivalent formula that is in CNF. This transformation is based on rules about logical equivalences: double negation elimination, De Morgan's laws, and the distributive law. 
+
+Since all propositional formulas can be converted into an equivalent formula in conjunctive normal form, proofs are often based on the assumption that all formulae are CNF. However, in some cases this conversion to CNF can lead to an exponential explosion of the formula. For example, translating the following non-CNF formula into CNF produces a formula with <math-expression>2^{n}</math-expression> clauses: 
+
+    <math-expression>(X_{1}\wedge Y_{1})\vee (X_{2}\wedge Y_{2})\vee \dots \vee (X_{n}\wedge Y_{n}).</math-expression>
+
+In particular, the generated formula is: 
+
+    <math-expression>(X_{1}\vee X_{2}\vee \cdots \vee X_{n})\wedge (Y_{1}\vee X_{2}\vee \cdots \vee X_{n})\wedge (X_{1}\vee Y_{2}\vee \cdots \vee X_{n})\wedge (Y_{1}\vee Y_{2}\vee \cdots \vee X_{n})\wedge \cdots \wedge (Y_{1}\vee Y_{2}\vee \cdots \vee Y_{n}).</math-expression>
+
+This formula contains <math-expression>2^{n}</math-expression> clauses; each clause contains either <math-expression>X_{i}</math-expression> or <math-expression>Y_{i}</math-expression> for each <math-expression>i</math-expression>. 
+
+There exist transformations into CNF that avoid an exponential increase in size by preserving satisfiability rather than equivalence. These transformations are guaranteed to only linearly increase the size of the formula, but introduce new variables. For example, the above formula can be transformed into CNF by adding variables <math-expression>Z_{1},\ldots ,Z_{n}</math-expression> as follows: 
+
+    <math-expression>(Z_{1}\vee \cdots \vee Z_{n})\wedge (\neg Z_{1}\vee X_{1})\wedge (\neg Z_{1}\vee Y_{1})\wedge \cdots \wedge (\neg Z_{n}\vee X_{n})\wedge (\neg Z_{n}\vee Y_{n}).</math-expression>
+
+An interpretation satisfies this formula only if at least one of the new variables is true. If this variable is <math-expression>Z_{i}</math-expression>, then both <math-expression>X_{i}</math-expression> and <math-expression>Y_{i}</math-expression> are true as well. This means that every model that satisfies this formula also satisfies the original one. On the other hand, only some of the models of the original formula satisfy this one: since the <math-expression>Z_{i}</math-expression> are not mentioned in the original formula, their values are irrelevant to satisfaction of it, which is not the case in the last formula. This means that the original formula and the result of the translation are equisatisfiable but not equivalent. 
+
+An alternative translation, the Tseitin transformation, includes also the clauses <math-expression>Z_{i}\vee \neg X_{i}\vee \neg Y_{i}</math-expression>. With these clauses, the formula implies <math-expression>Z_{i}\equiv X_{i}\wedge Y_{i}</math-expression>; this formula is often regarded to "define" <math-expression>Z_{i}</math-expression> to be a name for <math-expression>X_{i}\wedge Y_{i}</math-expression>. 
+
+## First-order logic
+
+In first order logic, conjunctive normal form can be taken further to yield the clausal normal form of a logical formula, which can be then used to perform first-order resolution. In resolution-based automated theorem-proving, a CNF formula 
+
+See below for an example. 
+
+## Computational complexity
+
+An important set of problems in computational complexity involves finding assignments to the variables of a boolean formula expressed in Conjunctive Normal Form, such that the formula is true. The k-SAT problem is the problem of finding a satisfying assignment to a boolean formula expressed in CNF in which each disjunction contains at most k variables. 3-SAT is NP-complete (like any other k-SAT problem with k>2) while 2-SAT is known to have solutions in polynomial time. As a consequence, the task of converting a formula into a DNF, preserving satisfiability, is NP-hard; dually, converting into CNF, preserving validity, is also NP-hard; hence equivalence-preserving conversion into DNF or CNF is again NP-hard. 
+
+Typical problems in this case involve formulas in "3CNF": conjunctive normal form with no more than three variables per conjunct. Examples of such formulas encountered in practice can be very large, for example with 100,000 variables and 1,000,000 conjuncts. 
+
+A formula in CNF can be converted into an equisatisfiable formula in "kCNF" (for k≥3) by replacing each conjunct with more than k variables <math-expression>X_{1}\vee \cdots \vee X_{k}\vee \cdots \vee X_{n}</math-expression> by two conjuncts <math-expression>X_{1}\vee \cdots \vee X_{k-1}\vee Z</math-expression> and <math-expression>\neg Z\vee X_{k}\cdots \vee X_{n}</math-expression> with Z a new variable, and repeating as often as necessary. 
+
+## Converting from first-order logic
+
+To convert first-order logic to CNF:
+
+  1. Convert to negation normal form. 
+    1. Eliminate implications and equivalences: repeatedly replace <math-expression>P\rightarrow Q</math-expression> with <math-expression>\lnot P\lor Q</math-expression>; replace <math-expression>P\leftrightarrow Q</math-expression> with <math-expression>(P\lor \lnot Q)\land (\lnot P\lor Q)</math-expression>. Eventually, this will eliminate all occurrences of <math-expression>\rightarrow </math-expression> and <math-expression>\leftrightarrow </math-expression>.
+    2. Move NOTs inwards by repeatedly applying De Morgan's Law. Specifically, replace <math-expression>\lnot (P\lor Q)</math-expression> with <math-expression>(\lnot P)\land (\lnot Q)</math-expression>; replace <math-expression>\lnot (P\land Q)</math-expression> with <math-expression>(\lnot P)\lor (\lnot Q)</math-expression>; and replace <math-expression>\lnot \lnot P</math-expression> with <math-expression>P</math-expression>; replace <math-expression>\lnot (\forall xP(x))</math-expression> with <math-expression>\exists x\lnot P(x)</math-expression>; <math-expression>\lnot (\exists xP(x))</math-expression> with <math-expression>\forall x\lnot P(x)</math-expression>. After that, a <math-expression>\lnot </math-expression> may occur only immediately before a predicate symbol.
+  2. Standardize variables 
+    1. For sentences like <math-expression>(\forall xP(x))\lor (\exists xQ(x))</math-expression> which use the same variable name twice, change the name of one of the variables. This avoids confusion later when dropping quantifiers. For example, <math-expression>\forall x[\exists y\mathrm {Animal} (y)\land \lnot \mathrm {Loves} (x,y)]\lor [\exists y\mathrm {Loves} (y,x)]</math-expression> is renamed to <math-expression>\forall x[\exists y\mathrm {Animal} (y)\land \lnot \mathrm {Loves} (x,y)]\lor [\exists z\mathrm {Loves} (z,x)]</math-expression>.
+  3. Skolemize the statement 
+    1. Move quantifiers outwards: repeatedly replace <math-expression>P\land (\forall xQ(x))</math-expression> with <math-expression>\forall x(P\land Q(x))</math-expression>; replace <math-expression>P\lor (\forall xQ(x))</math-expression> with <math-expression>\forall x(P\lor Q(x))</math-expression>; replace <math-expression>P\land (\exists xQ(x))</math-expression> with <math-expression>\exists x(P\land Q(x))</math-expression>; replace <math-expression>P\lor (\exists xQ(x))</math-expression> with <math-expression>\exists x(P\lor Q(x))</math-expression>. These replacements preserve equivalence, since the previous variable standardization step ensured that <math-expression>x</math-expression> doesn't occur in <math-expression>P</math-expression>. After these replacements, a quantifier may occur only in the initial prefix of the formula, but never inside a <math-expression>\lnot </math-expression>, <math-expression>\land </math-expression>, or <math-expression>\lor </math-expression>.
+    2. Repeatedly replace <math-expression>\forall x_{1}\ldots \forall x_{n}\;\exists y\;P(y)</math-expression> with <math-expression>\forall x_{1}\ldots \forall x_{n}\;P(f(x_{1},\ldots ,x_{n}))</math-expression>, where <math-expression>f</math-expression> is a new <math-expression>n</math-expression>-ary function symbol, a so-called "Skolem function". This is the only step that preserves only satisfiability rather than equivalence. It eliminates all existential quantifiers.
+  4. Drop all universal quantifiers.
+  5. Distribute ORs inwards over ANDs: repeatedly replace <math-expression>P\lor (Q\land R)</math-expression> with <math-expression>(P\lor Q)\land (P\lor R)</math-expression>.
+
+As an example, the formula saying "Anyone who loves all animals, is in turn loved by someone" is converted into CNF (and subsequently into clause form in the last line) as follows (highlighting replacement rule redexes in <math-expression>{\color {red}{\text{red}}}</math-expression>): 
+
+Informally, the Skolem function <math-expression>g(x)</math-expression> can be thought of as yielding the person by whom <math-expression>x</math-expression> is loved, while <math-expression>f(x)</math-expression> yields the animal (if any) that <math-expression>x</math-expression> doesn't love. The 3rd last line from below then reads as "<math-expression>x</math-expression> doesn't love the animal <math-expression>f(x)</math-expression>, or else <math-expression>x</math-expression> is loved by <math-expression>g(x)</math-expression>". 
+
+The 2nd last line from above, <math-expression>(\mathrm {Animal} (f(x))\lor \mathrm {Loves} (g(x),x))\land (\lnot \mathrm {Loves} (x,f(x))\lor \mathrm {Loves} (g(x),x))</math-expression>, is the CNF. 
+
