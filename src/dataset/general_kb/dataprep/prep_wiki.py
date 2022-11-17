@@ -1,10 +1,9 @@
 import os
-from urllib.parse import quote
 from .filter_wiki import filter_wiki_content
 from .topics_store import generate_kb_text
 from lib.wikipediaapi.fetch_wiki_html import fetch_wiki_article
 from lib.html2text.driver import convertHTMLtoText
-from src.util.util import pipe
+from src.util.util import pipe, convert_filename
 
 data_collection_dir = "src/dataset/general_kb/data"
 cwd = "src/dataset/general_kb/dataprep"
@@ -27,6 +26,6 @@ def prepare_wiki_articles():
    pass
 
 def write_text_to_file(text: str, filename: str):
-   out_file = open(os.path.join(data_collection_dir_abs_path, quote(filename)), "w")
+   out_file = open(os.path.join(data_collection_dir_abs_path, convert_filename(filename)), "w")
    out_file.write(text)
    out_file.close()
