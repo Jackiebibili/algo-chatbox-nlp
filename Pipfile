@@ -11,8 +11,10 @@ farm-haystack = "*"
 python-dotenv = "*"
 sympy = "*"
 latex2sympy2 = "*"
+flask = "*"
 
 [dev-packages]
+gunicorn = "*"
 
 [requires]
 python_version = "3.9"

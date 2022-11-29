@@ -1,0 +1,13 @@
+services:
+  haystack-api:
+    # Pull Haystack's latest commit
+    image: "deepset/haystack:cpu-main"
+    ports:
+      - 8000:8000
+    volumes:
+      - /Users/jack-li/Documents/fall_2022/capstone_project_cs4485/server/src/haystack/pipeline:/custom-pipeline
+    environment:
+      # See rest_api/pipeline/pipelines.haystack-pipeline.yml for configurations of Search & Indexing Pipeline.
+      - PIPELINE_YAML_PATH=/custom-pipeline/nlp_pipeline.yaml
+      - TOKENIZERS_PARALLELISM=false
+      - QUERY_PIPELINE_NAME=search_pipeline

@@ -5,7 +5,7 @@ from haystack.pipelines import Pipeline
 query_threshold = 0.5
 low_confidence_answer = "Could you please enter something else? I couldn't understand."
 
-p_ensemble = Pipeline.load_from_yaml(Path("nlp_pipeline.yaml"))
+p_ensemble = Pipeline.load_from_yaml(Path("src/haystack/pipeline/nlp_pipeline.yaml"))
 
 
 def query(q: str):

@@ -1,0 +1,5 @@
+pip install pipenv
+
+pipenv install --deploy --system --ignore-pipfile
+
+gunicorn -c /code/gunicorn_config.py --chdir /code/src/api wsgi:app

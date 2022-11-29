@@ -20,7 +20,7 @@ components:
     params:
       join_mode: concatenate
       sort_by_score: true
-      top_k_join: 5
+      top_k_join: 1
 
   - name: MyReader
     type: FARMReader
