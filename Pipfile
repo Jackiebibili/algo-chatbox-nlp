@@ -9,6 +9,8 @@ numpy = "*"
 wikipedia-api = "*"
 farm-haystack = "*"
 python-dotenv = "*"
+sympy = "*"
+latex2sympy2 = "*"
 
 [dev-packages]
 

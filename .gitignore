@@ -5,3 +5,4 @@
 /**/.env
 /src/haystack/elasticsearch/docker
 /*.zip
+/**/out*

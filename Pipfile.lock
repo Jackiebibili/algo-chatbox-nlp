@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b25ab87e9d440594d293c1379208e44caf2e86e0c3b9487711b0db51eb3e43c9"
+            "sha256": "f0029db1e208304c06cf8aa97e4f60f44951cdb409f04025c631f6c1d88603e1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,6 +23,12 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==1.8.1"
+        },
+        "antlr4-python3-runtime": {
+            "hashes": [
+                "sha256:168cdcec8fb9152e84a87ca6fd261b3d54c8f6358f42ab3b813b14a7193bb50b"
+            ],
+            "version": "==4.7.2"
         },
         "attrs": {
             "hashes": [
@@ -539,6 +545,13 @@
             ],
             "version": "==1.0.9"
         },
+        "latex2sympy2": {
+            "hashes": [
+                "sha256:fdcdaa0e1e1a4719d090de092b4df9f4139a695b0f65fac637768df1b08a5b1c"
+            ],
+            "index": "pypi",
+            "version": "==1.8.3"
+        },
         "llvmlite": {
             "hashes": [
                 "sha256:03aee0ccd81735696474dc4f8b6be60774892a2929d6c05d093d17392c237f32",
@@ -811,6 +824,13 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==9.0.0"
+        },
+        "mpmath": {
+            "hashes": [
+                "sha256:604bc21bd22d2322a177c73bdb573994ef76e62edd595d17e00aff24b0667e5c",
+                "sha256:79ffb45cf9f4b101a807595bcb3e72e0396202e0b1d25d689134b48c4216a81a"
+            ],
+            "version": "==1.2.1"
         },
         "msrest": {
             "hashes": [
@@ -1698,6 +1718,14 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.4.3"
+        },
+        "sympy": {
+            "hashes": [
+                "sha256:938f984ee2b1e8eae8a07b884c8b7a1146010040fccddc6539c54f401c8f6fcf",
+                "sha256:e32380dce63cb7c0108ed525570092fd45168bdae2faa17e528221ef72e88658"
+            ],
+            "index": "pypi",
+            "version": "==1.11.1"
         },
         "tabulate": {
             "hashes": [

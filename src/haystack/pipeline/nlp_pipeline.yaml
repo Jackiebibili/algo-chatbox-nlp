@@ -1,0 +1,77 @@
+version: 1.10.0
+
+components:
+  - name: MyESQNARetriever
+    type: EmbeddingRetriever
+    params:
+      document_store: MyQNADocumentStore
+      embedding_model: sentence-transformers/all-MiniLM-L6-v2
+      scale_score: false
+      top_k: 5
+
+  - name: SparseRetriever
+    type: BM25Retriever
+    params:
+      document_store: DocumentStore
+      top_k: 10
+
+  - name: JoinAns
+    type: JoinAnswers
+    params:
+      join_mode: concatenate
+      sort_by_score: true
+      top_k_join: 5
+
+  - name: MyReader
+    type: FARMReader
+    params:
+      model_name_or_path: deepset/roberta-base-squad2
+      top_k: 5
+
+  - name: QNADocsToAnswers
+    type: Docs2Answers
+
+  - name: DocumentStore
+    type: ElasticsearchDocumentStore
+    params:
+      host: b963fb901829469e968500b83b71ab81.us-central1.gcp.cloud.es.io
+      username: elastic
+      password: ytuLqABRF5zE7gbwEqL1aR7l
+      port: 9243
+      scheme: https
+      index: document
+
+  - name: MyQNADocumentStore
+    type: ElasticsearchDocumentStore
+    params:
+      host: b963fb901829469e968500b83b71ab81.us-central1.gcp.cloud.es.io
+      username: elastic
+      password: ytuLqABRF5zE7gbwEqL1aR7l
+      port: 9243
+      scheme: https
+      index: qna_document
+      embedding_field: question_emb
+      embedding_dim: 384
+      excluded_meta_data:
+        - question_emb
+      similarity: cosine
+
+pipelines:
+  - name: search_pipeline
+    nodes:
+      - name: SparseRetriever
+        inputs: 
+         - Query
+      - name: MyESQNARetriever
+        inputs: 
+         - Query
+      - name: MyReader
+        inputs: 
+         - SparseRetriever
+      - name: QNADocsToAnswers
+        inputs: 
+         - MyESQNARetriever
+      - name: JoinAns
+        inputs: 
+         - QNADocsToAnswers
+         - MyReader
