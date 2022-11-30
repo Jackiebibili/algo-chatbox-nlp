@@ -1,8 +1,15 @@
-FROM python:3.9-alpine
+FROM python:3.9.15-slim
 
 COPY . /code
 WORKDIR /code
 
-RUN chmod +x ./hostscript
+RUN pip install --upgrade pip
+RUN pip install pipenv
 
-ENTRYPOINT ./hostscript
+RUN apt-get update
+RUN apt-get install --yes --no-install-recommends \
+   gcc g++ libffi-dev
+
+RUN pipenv install --deploy --system --ignore-pipfile
+
+CMD ["gunicorn", "-c", "/code/gunicorn_config.py", "src.api.wsgi:app"]

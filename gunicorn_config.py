@@ -3,11 +3,11 @@
 # pidfile = 'app01.pid'
 # worker_tmp_dir = '/dev/shm'
 # worker_class = 'gthread'
-workers = 8
+workers = 1
 worker_connections = 1000
-timeout = 60
+timeout = 300
 keepalive = 2
-threads = 4
+threads = 1
 proc_name = 'app01'
 bind = '0.0.0.0:8080'
 backlog = 2048

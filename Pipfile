@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pandas = "*"
 numpy = "*"
+pandas = "*"
 wikipedia-api = "*"
 farm-haystack = "*"
 python-dotenv = "*"
