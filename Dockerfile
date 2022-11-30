@@ -1,14 +1,15 @@
-FROM python:3.9.15-slim
+FROM debian
 
 COPY . /code
 WORKDIR /code
 
+RUN apt-get update
+RUN apt-get install --yes --no-install-recommends \
+    python3 pip gcc g++ libffi-dev
+
 RUN pip install --upgrade pip
 RUN pip install pipenv
 
-RUN apt-get update
-RUN apt-get install --yes --no-install-recommends \
-   gcc g++ libffi-dev
 
 RUN pipenv install --deploy --system --ignore-pipfile
 
