@@ -2,7 +2,6 @@
 .vscode
 /tmp
 .DS_Store
-/**/.env
 /src/haystack/elasticsearch/docker
 /*.zip
 /**/out*
