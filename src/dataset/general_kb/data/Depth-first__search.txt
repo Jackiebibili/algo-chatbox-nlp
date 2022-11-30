@@ -88,6 +88,7 @@ Another possible implementation of iterative depth-first search uses a stack of 
     
     procedure DFS_iterative(G, v) is
         let S be a stack
+        label v as discovered
         S.push(iterator of G.adjacentEdges(v))
         while S is not empty do
             if S.peek().hasNext() then

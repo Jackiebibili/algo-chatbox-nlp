@@ -85,4 +85,4 @@ def store_general_kb():
    document_store.write_documents(docs)
 
 store_qna_kb()
-# store_general_kb()
+store_general_kb()

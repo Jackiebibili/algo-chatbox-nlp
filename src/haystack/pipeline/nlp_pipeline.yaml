@@ -34,9 +34,9 @@ components:
   - name: DocumentStore
     type: ElasticsearchDocumentStore
     params:
-      host: b963fb901829469e968500b83b71ab81.us-central1.gcp.cloud.es.io
+      host: 391f53d8501748afaf1fbfc591ed43e1.us-central1.gcp.cloud.es.io
       username: elastic
-      password: ytuLqABRF5zE7gbwEqL1aR7l
+      password: VjLfWuuVTOnUZbFlI6a9eriq
       port: 9243
       scheme: https
       index: document
@@ -44,9 +44,9 @@ components:
   - name: MyQNADocumentStore
     type: ElasticsearchDocumentStore
     params:
-      host: b963fb901829469e968500b83b71ab81.us-central1.gcp.cloud.es.io
+      host: 391f53d8501748afaf1fbfc591ed43e1.us-central1.gcp.cloud.es.io
       username: elastic
-      password: ytuLqABRF5zE7gbwEqL1aR7l
+      password: VjLfWuuVTOnUZbFlI6a9eriq
       port: 9243
       scheme: https
       index: qna_document

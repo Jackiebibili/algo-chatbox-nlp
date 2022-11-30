@@ -10,7 +10,7 @@ Tracking the color of each node requires only one bit of information per node be
 
 In 1972, Rudolf Bayer invented a data structure that was a special order-4 case of a B-tree. These trees maintained all paths from root to leaf with the same number of nodes, creating perfectly balanced trees. However, they were not binary search trees. Bayer called them a "symmetric binary B-tree" in his paper and later they became popular as 2–3–4 trees or just 2–4 trees.
 
-In a 1978 paper, "A Dichromatic Framework for Balanced Trees", Leonidas J. Guibas and Robert Sedgewick derived the red–black tree from the symmetric binary B-tree. The color "red" was chosen because it was the best-looking color produced by the color laser printer available to the authors while working at Xerox PARC. Another response from Guibas states that it was because of the red and black pens available to them to draw the trees. Author's name was Rudolf Bayer so he took the initials from his name that is R B and in colours, R means red and B means Black 
+In a 1978 paper, "A Dichromatic Framework for Balanced Trees", Leonidas J. Guibas and Robert Sedgewick derived the red–black tree from the symmetric binary B-tree. The color "red" was chosen because it was the best-looking color produced by the color laser printer available to the authors while working at Xerox PARC. Another response from Guibas states that it was because of the red and black pens available to them to draw the trees.
 
 In 1993, Arne Andersson introduced the idea of a right leaning tree to simplify insert and delete operations.
 

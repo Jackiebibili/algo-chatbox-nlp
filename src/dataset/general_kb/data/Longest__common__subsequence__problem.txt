@@ -242,6 +242,10 @@ The third drawback is that of collisions. Since the checksum or hash is not guar
 
 If only the length of the LCS is required, the matrix can be reduced to a <math-expression>2\times \min(n,m)</math-expression> matrix with ease, or to a <math-expression>\min(m,n)+1</math-expression> vector (smarter) as the dynamic programming approach only needs the current and previous columns of the matrix. Hirschberg's algorithm allows the construction of the optimal sequence itself in the same quadratic time and linear space bounds.
 
+### Reduce cache misses
+
+Chowdhury and Ramachandran devised a quadratic-time linear-space algorithm for finding the LCS length along with an optimal sequence which runs faster than Hirschberg's algorithm in practice due to its superior cache performance. The algorithm has an asymptotically optimal cache complexity under the Ideal cache model. Interestingly, the algorithm itself is cache-oblivious meaning that it does not make any choices based on the cache parameters (e.g., cache size and cache line size) of the machine. 
+
 ### Further optimized algorithms
 
 Several algorithms exist that run faster than the presented dynamic programming approach. One of them is Hunt–Szymanski algorithm, which typically runs in <math-expression>O((n+r)\log(n))</math-expression> time (for <math-expression>n>m</math-expression>), where <math-expression>r</math-expression> is the number of matches between the two sequences. For problems with a bounded alphabet size, the Method of Four Russians can be used to reduce the running time of the dynamic programming algorithm by a logarithmic factor.

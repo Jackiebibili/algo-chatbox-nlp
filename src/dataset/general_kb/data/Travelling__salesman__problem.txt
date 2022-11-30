@@ -136,7 +136,7 @@ The most direct solution would be to try all permutations (ordered combinations)
 
 One of the earliest applications of dynamic programming is the Held–Karp algorithm that solves the problem in time <math-expression>O(n^{2}2^{n})</math-expression>. This bound has also been reached by Exclusion-Inclusion in an attempt preceding the dynamic programming approach. 
 
-Improving these time bounds seems to be difficult. For example, it has not been determined whether a classical exact algorithm for TSP that runs in time <math-expression>O(1.9999^{n})</math-expression> exists.
+Improving these time bounds seems to be difficult. For example, it has not been determined whether a classical exact algorithm for TSP that runs in time <math-expression>O(1.9999^{n})</math-expression> exists. The currently best quantum exact algorithm for TSP due to Ambainis et al. runs in time <math-expression>O(1.728^{n})</math-expression>. 
 
 Other approaches include: 
 
