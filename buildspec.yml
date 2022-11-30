@@ -12,8 +12,8 @@ phases:
       - chmod 600 ~/.ssh/id_rsa
   pre_build:
     commands:
-      - echo Logging into aws ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $IMAGE_REGISTRY
+      - echo Logging into aws public ECR...
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin $IMAGE_REGISTRY
   build:
     commands:
       - echo Build started on `date`
