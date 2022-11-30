@@ -14,7 +14,6 @@ components:
     type: BM25Retriever
     params:
       document_store: DocumentStore
-      use_gpu: true
       top_k: 10
 
   - name: JoinAns
