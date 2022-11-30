@@ -2,7 +2,7 @@ version: "3.7"
 services:
   haystack-api:
     container_name: chatbox-nlp-api-gunicorn-container
-    image: 038582424441.dkr.ecr.us-east-2.amazonaws.com/chatbox-nlp-api:latest
+    image: public.ecr.aws/q0s5b2t6/chatbox-nlp-api:latest
     ports:
       - 8080:8080
     # build:
