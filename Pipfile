@@ -12,6 +12,7 @@ python-dotenv = "*"
 sympy = "*"
 latex2sympy2 = "*"
 flask = "*"
+flask-cors = "*"
 
 [dev-packages]
 gunicorn = "*"
