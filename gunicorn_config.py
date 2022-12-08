@@ -5,7 +5,7 @@
 # worker_class = 'gthread'
 workers = 1
 worker_connections = 1000
-timeout = 300
+timeout = 900
 keepalive = 2
 threads = 1
 proc_name = 'app01'
