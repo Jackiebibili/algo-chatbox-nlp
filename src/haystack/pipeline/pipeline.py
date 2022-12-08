@@ -2,7 +2,7 @@ from pathlib import Path
 from haystack.pipelines import Pipeline
 # from haystack.utils import print_answers
 
-query_threshold = 0.5
+query_threshold = 0.4
 low_confidence_answer = "Could you please enter something else? I couldn't understand."
 
 p_ensemble = Pipeline.load_from_yaml(Path("src/haystack/pipeline/nlp_pipeline.yaml"))

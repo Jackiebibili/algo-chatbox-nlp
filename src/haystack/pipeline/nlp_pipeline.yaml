@@ -16,6 +16,12 @@ components:
       document_store: DocumentStore
       top_k: 10
 
+  - name: SylSparseRetriever
+    type: BM25Retriever
+    params:
+      document_store: MySylDocumentStore
+      top_k: 10
+
   - name: JoinAns
     type: JoinAnswers
     params:
@@ -24,6 +30,13 @@ components:
       top_k_join: 1
 
   - name: MyReader
+    type: FARMReader
+    params:
+      model_name_or_path: deepset/roberta-base-squad2
+      use_gpu: true
+      top_k: 5
+
+  - name: MySylReader
     type: FARMReader
     params:
       model_name_or_path: deepset/roberta-base-squad2
@@ -42,6 +55,16 @@ components:
       port: 9243
       scheme: https
       index: document
+
+  - name: MySylDocumentStore
+    type: ElasticsearchDocumentStore
+    params:
+      host: 391f53d8501748afaf1fbfc591ed43e1.us-central1.gcp.cloud.es.io
+      username: elastic
+      password: VjLfWuuVTOnUZbFlI6a9eriq
+      port: 9243
+      scheme: https
+      index: syl_document
 
   - name: MyQNADocumentStore
     type: ElasticsearchDocumentStore
@@ -64,12 +87,18 @@ pipelines:
       - name: SparseRetriever
         inputs: 
          - Query
+      - name: SylSparseRetriever
+        inputs: 
+         - Query
       - name: MyESQNARetriever
         inputs: 
          - Query
       - name: MyReader
         inputs: 
          - SparseRetriever
+      - name: MySylReader
+        inputs: 
+         - SylSparseRetriever
       - name: QNADocsToAnswers
         inputs: 
          - MyESQNARetriever
@@ -77,3 +106,4 @@ pipelines:
         inputs: 
          - QNADocsToAnswers
          - MyReader
+         - MySylReader

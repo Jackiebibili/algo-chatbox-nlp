@@ -1,0 +1,325 @@
+                            Course Syllabus – Fall 2022
+
+
+Course Information
+Course                   CS 4349, Section 001
+Course Title             Advanced Algorithm Design and Analysis
+Term                     Fall 2022
+Days & Times             Tuesdays & Thursdays 10:00 am – 11:15 am
+
+Professor Contact Information
+Professor                       Anjum Chida
+Office Phone                    972-883-2185
+Email Address                   anjum.chida@utdallas.edu
+Office Location                 ECSS 4.230
+Online Office Hours             In-person -       11:30 am to 1:30 pm
+                                  (Tuesdays & Thursdays)
+                              (Or by appointment, meeting can be virtual as well via MS-Teams)
+
+Course Pre-requisites, Co-requisites, and/or Other Restrictions
+    -   CS 3305 with a grade of C or better, and CE 3345 or CS 3345 or SE 3345 or TE 3345.
+
+Course Description
+- Asymptomatic analysis, recurrences, and graph algorithms. Algorithm design techniques such as
+greedy method, dynamic programming, and divide-and-conquer. Issues from computational
+complexity. Course emphasizes a theoretical approach.
+
+Student Learning Objectives/Outcomes
+After successful completion of this course, the students are expected to gain these objectives:
+    1. Ability to use asymptotic notations, solve recurrences, perform algorithm analysis
+    2. Ability to design, analyze, and prove correctness of algorithms based on Divide-and-
+        Conquer techniques
+    3. Ability to design, analyze, and prove correctness of algorithms based on
+        Greedy techniques
+    4. Ability to design, analyze, and prove correctness of algorithms based on Dynamic
+        Programming techniques
+    5. Ability to design, analyze and prove correctness of graph algorithms
+
+
+Required Textbooks and Materials
+- Cormen T.H., Leiserson C.E., Rivest R.L., and Stein C.,“Introduction to Algorithms”, 3rd ed.,
+ISBN: 978-0262033848.
+
+
+
+
+Course Syllabus Fall 2022 CS 4349_001                                                      Page 1
+Academic Calendar
+
+ Class                 Date             Material Covered                    Major Topic
+
+  1, 2             Aug 23, 25             Chapter 1&2                 Introduction, Math Review
+                                                                 Growth of Functions; Asymptotic
+  3, 4            Aug 30, Sep 1            Chapter 3
+                                                                            Analysis
+  5, 6               Sep 6, 8              Chapter 4                     Divide and Conquer
+
+  7, 8              Sep 13, 15             Chapter 4                     Divide and Conquer
+                                                                       Dynamic Programming
+  9, 10             Sep 20, 22             Chapter 15
+                                                                             Review
+   11                Sep 27                                                    Exam I
+
+   12                 Sep 29               Chapter 15                  Dynamic Programming
+
+ 13, 14              Oct 4, 5              Chapter 16                    Greedy Algorithms
+                                                                        Graph Representation
+ 15, 16             Oct 11, 13             Chapter 22
+                                                                          Graph Searching
+ 17, 18             Oct 18, 20             Chapter 23                 Minimum Spanning Tree
+                                                                   Single Source Shortest Path
+ 19, 20             Oct 25, 27             Chapter 24
+                                                                            Review
+   21                 Nov 1                                                   Exam II
+
+   22                 Nov 3                Chapter 24                   All pairs Shortest Path
+                                                                  Maximum Flow /minimum cut
+ 23, 24             Nov 8, 10              Chapter 24
+                                                                         Algorithms
+ 25, 26            Nov 15, 17              Chapter 25         NP-Hardness and NP-Completeness
+
+                                  Thanksgiving Break Nov 21-25
+
+ 27, 28           Nov 29, Dec 1            Chapter 26         NP-Hardness and NP-Completeness
+
+ 28, 29              Dec 7, 8                                                  Review
+
+   30                Dec 13                                                   Exam III
+
+
+
+Assignments will be through eLearning. For academic calendar Click Here
+
+Please view the TimeLine Diagram in elearning for more information.
+
+
+
+
+Course Syllabus Fall 2022 CS 4349_001                                                       Page 2
+Grading Policy:
+       The grade will be determined as described below. The lowest assignment score will
+be dropped. No other bonus work, make-up work, dropped scores, or other means of raising
+your grade should be expected. At the end of the semester, it is possible that grades may
+be curved, but a curve should not be expected.
+
+Grades are not based on needs or consequences but are based only on performance.
+
+
+Total score will be calculated as follows:
+
+              Assessment                  Percentage towards your Total Score
+                Exam – I                                 20 %
+               Exam – II                                 25 %
+               Exam – III                                25 %
+              Assignments                                20 %
+             Quizzes & Class
+                                                          10 %
+              Participation
+
+
+Assignment of letter grade is as follows:
+
+                                  Total          Letter Grade
+                                 98-100              A+
+                                  93-97               A
+                                  90-92              A-
+                                  88-89              B+
+                                  83-87               B
+                                  80-82              B-
+                                  78-79              C+
+                                  73-77               C
+                                  70-72              C-
+                                  60-69               D
+                                  0-59                F
+
+
+
+
+Course Syllabus Fall 2022 CS 4349_001                                              Page 3
+Tentative Test Dates:
+
+        Exam 1:         September 27
+        Exam 2:         November 1
+        Exam 3:         December 13
+
+        *All examinations will be at the Testing Center (https://ets.utdallas.edu/testing-center).
+        Seats will fill up quickly; students are encouraged to register for ALL three exams early in
+        advance during the first two weeks of semester.
+        *Failure to take the exam due to incorrect registration or absence will result in score of
+        zero for that exam, NO EXCEPTIONS.
+
+
+Course & Instructor Policies:
+
+Exams
+         All three exams will be at the Testing Center. All students are required to register
+and reserve seats at the center at least 72 hours before the exam. This 72-hour deadline
+is strictly followed by the testing center. If a student misses an exam due to not registering
+72 hours prior to the exam, this will constitute a ZERO for the exam. No Exceptions will
+be made for missing the exam due to missed or incorrect registration.
+All exams could be registered in the first few weeks of the semester, once registered a
+confirmation email will be sent to the student. It is the student responsibility to ensure
+proper registration and to follow all the guidelines and dress code restrictions given in the
+Testing center website.
+         Exams must be taken on time. Exceptions require advance approval by the
+instructor. It is up to the instructor to determine whether an exception will be made and
+will depend largely on proof of extraordinary circumstances. Otherwise, a missed exam
+will either incur a substantial penalty or be recorded as a zero.
+
+
+Make-Up Exams
+       Make-Up exams will be administered only under extreme extenuating
+circumstances like hospitalization or road accidents. Proof of such incident is required to
+request a Make-Up and will be approved after instructors’ discretion.
+
+Assignments
+        All assignments will be available via elearning and must be submitted via elearning
+as well. No email submission allowed. Assignments must be turned in on time. All
+assignments will be due on eLearning. Late submissions will be accepted, but any late
+submission made within 24 hours of when the assignment is due will have its score
+deducted by 10% the maximum score possible. Late submissions made more than 24 but
+less than 48 hours after the assignment is due will have the score deducted an additional
+10% (so 20% total). No points will be awarded for submissions more than 48 hours late.
+Even after deductions, scores cannot be negative. It is your responsibility to upload your
+
+
+Course Syllabus Fall 2022 CS 4349_001                                                        Page 4
+work early enough to avoid possible problems uploading to eLearning. It is your
+responsibility to ensure that you have submitted the correct items. It is recommended that
+you double-check your submission to ensure it is correct.
+ All Assignments are to be individual efforts. You are allowed to collaborate with other
+students, or to discuss solutions with other students, but make sure that the work you submit
+is your own and not simply copied from other students work. Copying of Assignments in
+whole or in part, from other students in this semester or previous semesters will be
+considered an act of scholastic dishonesty. There will be no makeup exams or other extra
+credit opportunity in the semester.
+
+No makeup work is possible for Assignments, but the lowest Assignment score will be
+dropped before calculating Assignment Total.
+
+
+Participation Quizzes
+        Participation Quizzes will be available via elearning multiple times throughout the
+semester. These quizzes will not be graded but participation credit will be given if the
+quizzes are attempted. Student will be able to attempt the quiz multiple times even though
+single attempt per quiz is sufficient to score the participation credit for that quiz. These
+attempts will be considered to calculate the Class Participation credit
+
+
+Class Attendance
+       Regular and punctual class attendance is expected. Attendance will be taken in
+every class, and this will constitute a part of Class Participation credit. Attendance will be
+taken as an elearning Quiz, students need to login into elearning and take the
+Attendance Quiz in every class. Students who fail to attend class regularly are inviting
+scholastic difficulty. Attendance score will be used to calculate Class Participation credit.
+
+Class Participation
+        Regular class participation is expected. Students who fail to participate in class
+regularly are inviting scholastic difficulty. A portion of the grade for this course is directly
+tied to your participation in this class. It also includes engaging in group or other activities
+during class that solicit your feedback on homework assignments, readings, or materials
+covered in the lectures (and/or labs). Class participation is documented by faculty.
+Successful participation is defined as consistently adhering to University requirements, as
+presented in this syllabus. Failure to comply with these University requirements is a
+violation of the Student Code of Conduct.
+
+Additional Videos
+       In addition to regular class and lecture, the student will be required to watch
+additional videos covering some class material or providing help with Assignments. These
+additional videos will be released every week. There will be at least one hour and at most
+
+
+
+
+Course Syllabus Fall 2022 CS 4349_001                                                    Page 5
+2 hours of video released every week. Students will be expected to watch these videos in
+timely manner and contribute to class discussions pertaining to these videos.
+
+Email Correspondence with the Instructor.
+        Any courses related questions can be asked via email to the instructor. It is the
+instructor’s policy to respond to every email within 24 hours, if a response is not given in
+24 hours, the student is encouraged to email again. On occasions, the instructor gets too
+many emails and might forget to respond or read the email, student patience is highly
+appreciated in this matter.
+
+Class Assessment Surveys
+        There are three class assessment survey, one at the Beginning of the Semester, one
+at the middle and one at the end of the semester. The end of semester survey is the official
+UTD course evaluation survey taken from the website eval.utdallas.edu . The other two
+surveys will be via elearning. All surveys are anonymous, but the instructor has the
+information whether a particular student has submitted the survey. Survey submission will
+be considered for Class Participation score calculation.
+
+Class Materials
+       The instructor may provide class materials that will be made available to all
+students registered for this class as they are intended to supplement the classroom
+experience. These materials may be downloaded during the course; however, these
+materials are for registered students' use only. Classroom materials may not be reproduced
+or shared with those not in class or uploaded to other online environments except to
+implement an approved Office of Student AccessAbility accommodation. Failure to
+comply with these University requirements is a violation of the Student Code of Conduct.
+
+
+Class Recordings
+        Students are expected to follow appropriate University policies and maintain the
+security of passwords used to access recorded lectures. Unless the Office of Student
+AccessAbility has approved the student to record the instruction, students are expressly
+prohibited from recording any part of this course. Recordings may not be published,
+reproduced, or shared with those not in the class, or uploaded to other online environments
+except to implement an approved Office of Student AccessAbility accommodation. Failure
+to comply with these University requirements is a violation of the Student Code of
+Conduct.
+        The instructor may record meetings of this course. These recordings will be made
+available to all students registered for this class, the intent is to supplement the classroom
+experience.
+Comet Creed
+
+This creed was voted on by the UT Dallas student body in 2014. It is a standard that
+Comets choose to live by and encourage others to do the same:
+
+
+
+Course Syllabus Fall 2022 CS 4349_001                                                  Page 6
+        “As a Comet, I pledge honesty, integrity, and service in all that I do.”
+
+
+Academic Support Resources
+
+The information contained in the following link lists the University’s academic support
+resources for all students.
+Please see http://go.utdallas.edu/academic-support-resources.
+
+
+The University of Texas at Dallas is committed to providing reasonable accommodations
+for all persons with disabilities. The syllabus is available in alternate formats upon
+request. If you are seeking classroom accommodations under the Americans with
+Disabilities Act (2008), you are required to register with the Office of Student AccessAbility,
+located in the Administration Building, Suite 2.224. Their phone number is 972-883-2098,
+email: studentaccess@utdallas.edu and website is https://studentaccess.utdallas.edu .
+To receive academic accommodations for this class, please obtain the proper Office of
+Student AccessAbility letter of accommodation and meet with me at the beginning of the
+semester."
+
+
+
+
+UT Dallas Syllabus Policies and Procedures
+
+
+The information contained in the following link constitutes the University’s policies and
+procedures segment of the course syllabus. Please review the catalog sections regarding
+the credit/no credit or pass/fail grading option and withdrawal from class.
+
+
+Please go to http://go.utdallas.edu/syllabus-policies for these policies.
+
+
+  The descriptions and timelines contained in this syllabus are subject to change at the
+                               discretion of the Professor.
+
+
+
+
+Course Syllabus Fall 2022 CS 4349_001                                                   Page 7
+Course Syllabus Fall 2022 CS 4349_001   Page 8
+
