@@ -84,5 +84,15 @@ def store_general_kb():
    # Now, let's write the dicts containing documents to our DB.
    document_store.write_documents(docs)
 
+def store_syl_kb():
+   index = "syl_document"
+   document_store = ElasticsearchDocumentStore(host=host, scheme='https', port=port, index=index, username=username, password=pw)
+   # preprocessing documents
+   doc_dir = os.path.join(os.getcwd(), "src/dataset/syl_kb/data")
+
+   docs = convert_files_to_docs(dir_path=doc_dir, clean_func=clean_wiki_text, split_paragraphs=True)
+   document_store.write_documents(docs)
+
 store_qna_kb()
 store_general_kb()
+store_syl_kb()
