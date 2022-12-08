@@ -12,5 +12,6 @@ RUN pip install pipenv
 
 
 RUN pipenv install --deploy --system --ignore-pipfile
+RUN pip install tensorflow tensorflow_hub tensorflow-text
 
 CMD ["gunicorn", "-c", "/code/gunicorn_config.py", "src.api.wsgi:app"]

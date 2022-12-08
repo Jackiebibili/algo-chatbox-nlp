@@ -113,10 +113,11 @@ def get_ordered_functions_growth_rate(exprs: list[str], order=ASC):
       raise MathExprBaseException(f"Cannot compare given expressions. Error: {str(ex)}")
    
    # print results
-   results = []
-   for idx in range(len(fns) - 1):
-      print_comparison_result(results, fns[idx], fns[idx + 1])
-   return results
+   # results = []
+   # for idx in range(len(fns) - 1):
+   #    print_comparison_result(results, fns[idx], fns[idx + 1])
+   # return results
+   return list(map(lambda x: str(x), fns))
 
 
 # custom exception classes
@@ -139,12 +140,12 @@ class MathExprSymbolException(MathExprBaseException):
 
 
 # test
-print(get_ordered_functions_growth_rate([
-   '0','2','3'
-]))
-print(get_ordered_functions_growth_rate([
-   '100n^2', "3n^3", "3n", "1"
-]))
-print(get_ordered_functions_growth_rate([
-   'n!', "n^n", "2^n", "\\log_2n"
-]))
+# print(get_ordered_functions_growth_rate([
+#    '0','2','3'
+# ]))
+# print(get_ordered_functions_growth_rate([
+#    '100n^2', "3n^3", "3n", "1"
+# ]))
+# print(get_ordered_functions_growth_rate([
+#    'n!', "n^n", "2^n", "\\log_2n"
+# ]))
