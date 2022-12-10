@@ -1,3 +1,3 @@
 [submodule "lib/html2text"]
 	path = lib/html2text
-	url = git@github.com:Jackiebibili/html2text.git
+	url = https://github.com/Jackiebibili/html2text.git
