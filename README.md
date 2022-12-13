@@ -29,6 +29,19 @@
 - Run shell script `prod.sh` to build an image of the API and the NLP pipeline. Then, the backend will be running in a docker container. __It has been tested that in Linux x86 system the docker image can be successfully built.__
 - It is suggested that backend server should have a __GPU__ for faster inferencing time.
 
+## Architecture
+NLP pipeline visualization:\
+\
+![NLP pipeline visualization](docs/chatbox-nlp-flow.png)
+
+## Performance of QueryClassifier
+Precision = 1.00\
+Recall = 0.83\
+F1 = 0.91\
+Confusion Matrix:\
+\
+![Confusion Matrix](docs/confusion_matrix.png)
+
 ## Miscellaneous
 - In Fall 2022, the backend is hosted on the Google Cloud Platform. We utilized a Nvidia Tesla P100 (225W, 16G RAM) and 2 vCPU with 7.5G RAM. This results in 5s response time for each request on average.
    - A elasticsearch host should be running locally or on the cloud. We used to have a free-trial cloud elasticsearch host provided by [elastic.co](https://www.elastic.co/). Alternatively, elasticsearch instance can also be hosted in a docker container.
